@@ -1,13 +1,18 @@
-
-
+import User from "../model/user";
 
 export default function crudRepository(model){
     return {
        
         create:async function (data){
-            const newDoc=await model.create(data)
-            return newDoc
-        },
+      try {
+        console.log("📦 Creating new document:", data);
+        const newDoc = await model.create(data);
+        return newDoc;
+      } catch (err) {
+        console.error("❌ Error creating document:", err);
+        throw err;
+      }
+    },
         getAll:async function (){
             const allDocs=await model.find()
             return allDocs
