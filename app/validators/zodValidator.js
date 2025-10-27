@@ -8,16 +8,26 @@ export const validate=async(schema,data)=>{
    return  await schema.parseAsync(data)
      
     }catch(error){
-        console.log('Validation error in zod validator',error.errors)
-        throw {
-      name: "ZodError",
-      statusCode: StatusCodes.BAD_REQUEST,
+        console.log('Validation error in zod validator',error, typeof error)
+             console.log(error,'dekho error')
+        let explanation=[];
+        let errorMessage=''
 
-      response: customErrorResponse({
-        message: "Validation Error",
-        explanation: error.errors.map(e => e.message).join(", "),
-      }), 
-    };
+         
+        
+      // error.errors.forEach((key)=>{
+      //   explanation.push(key.path[0]+' '+key.message)
+      //   errorMessage += ' : ' +key.message;
+      // }) 
+
+      return NextResponse.json(
+      { status:StatusCodes.OK },
+      {message:customErrorResponse({
+         message:'Validation error' + errorMessage,
+         explanation:explanation
+      })}
+      )
+
   
     }
    }
