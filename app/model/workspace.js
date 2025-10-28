@@ -12,7 +12,7 @@ const workspaceSchema=new mongoose.Schema({
     },
     members:[
         {
-            memeberId:{
+            memberId:{
               type:mongoose.Schema.Types.ObjectId,
             ref:'User'
             },

@@ -3,6 +3,9 @@ import Workspace from "../model/workspace"
 import ClientError from "../utils/errors/clientErrors"
 import crudRepository from "./crudRepository"
 import User from "../model/user"
+import { channel } from "diagnostics_channel"
+import Channel from "../model/channel"
+import channelRepository from "./channelRepository"
 
 
 const workspaceRepository={
@@ -78,10 +81,42 @@ const workspaceRepository={
 
         return workspace
     },
-    addChannelToWorkspace:async function(){
+    addChannelToWorkspace:async function(workspaceId,channelName){
+        
+        const workspace=await Workspace.findById(workspaceId).populate("channels")
 
+          if(!workspace){
+            throw new ClientError({
+                explaination:'Invalid data sent from the client',
+                message:'Workspace not found ',
+                statusCode:StatusCodes.NOT_FOUND
+            })
+          }
+
+          const isChannelPartOfWorkspace=workspace.channels.find((channel)=>channel.name === channelName)
+          
+          if(isChannelPartOfWorkspace){
+             throw new ClientError({
+                explaination:'Invalid data sent from client',
+                message:'Channel already part of workspace',
+                statusCode:StatusCodes.FORBIDDEN    
+             })
+          }
+
+          const channel=await channelRepository.create({name:channelName})
+
+          workspace.channels.push(channel)
+
+          await workspace.save()
+
+          return workspace
     },
     fetchAllWorkspaceByMemberId:async function(){
+        const workspaces=await Workspace.find({'members':{$elemMatch:{
+             memberId:memberId
+        }}}).populate('members.memberId','username email avatar')
+
+        return workspaces
 
     }
 }

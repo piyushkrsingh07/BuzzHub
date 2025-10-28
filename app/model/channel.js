@@ -9,6 +9,6 @@ const channelSchema=new mongoose.Schema({
    
 } ,{timestamps:true})
 
-const channel=mongoose.model('Channel',channelSchema)
+const Channel=mongoose.model('Channel',channelSchema)
 
 export default Channel
