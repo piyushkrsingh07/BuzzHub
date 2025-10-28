@@ -40,7 +40,11 @@ userSchema.pre('save',async function (){
     const salt=await bcrypt.genSaltSync(10)
     console.log(user.username,"PKKKKKKKKK")
     const hashedPassword=await bcrypt.hashSync(this.password,salt)
+ console.log("dekho hash",hashedPassword)
 
+    if(hashedPassword){
+        this.password=hashedPassword
+    }
     if(!this.avatar) {
     this.avatar=`https://robohash.org/${this.username}`
     console.log(this.avatar,'see avatar')

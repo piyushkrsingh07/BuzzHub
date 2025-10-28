@@ -6,6 +6,7 @@ import { createJWT } from "../utils/common/authUtils"
 export const signUpService=async(data)=>{
     try{
         const newUser=await userRepository.create(data)
+        console.log(newUser,'dekho new user')
         return newUser
     }catch(error){
        console.log('User Service Error',error)
