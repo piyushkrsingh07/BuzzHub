@@ -2,12 +2,11 @@ import userRepository from '@/app/repositories/userRepository'
 import { StatusCodes } from 'http-status-codes'
 import jwt from 'jsonwebtoken'
 import { NextResponse } from 'next/server'
+import { internalErrorResponse } from './responseObjects'
 
-export const isAuthenticated=async(request,response)=>{
+export const isAuthenticated=async(token)=>{
 
     try{
-     const token=request.headers('x-access-token')
-
      if(!token){
         return NextResponse.json(
              {
@@ -36,10 +35,11 @@ export const isAuthenticated=async(request,response)=>{
                          )
      }
 
-     console.log(response,'dekho response')
+     console.log(response,'dekho response at middleware')
      const user=await userRepository.getById(response.id)
+          console.log(user,'see user at middle')
+     return user
 
-     request.user=user.id
     }catch(error){
         console.log('Auth middleware error',error)
         if(error.name === 'JsonWebTokenError'){

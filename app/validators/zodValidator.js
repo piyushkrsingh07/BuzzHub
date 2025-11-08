@@ -5,6 +5,7 @@ import { NextResponse } from "next/server"
 export const validate=async(schema,data)=>{
 
     try{
+      console.log( await schema.parseAsync(data,'dekhna kha fail hua'))
    return  await schema.parseAsync(data)
      
     }catch(error){

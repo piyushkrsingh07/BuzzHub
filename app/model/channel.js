@@ -1,4 +1,4 @@
-import { Channel } from "diagnostics_channel";
+
 import mongoose from "mongoose";
 
 const channelSchema=new mongoose.Schema({
@@ -7,8 +7,8 @@ const channelSchema=new mongoose.Schema({
         required:[true,'Channel name is required']
     },
    
-} ,{timestamps:true})
+},{timestamps:true})
 
-const Channel=mongoose.model('Channel',channelSchema)
+const Channel= mongoose.models.Channel || mongoose.model('Channel',channelSchema)
 
 export default Channel

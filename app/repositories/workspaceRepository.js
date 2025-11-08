@@ -43,7 +43,7 @@ const workspaceRepository={
     addMemberToWorkspace:async function(workspaceId,memberId,role){
            
         const workspace=await Workspace.findById(workspaceId)
-
+           console.log(workspace,'DEKHO WORKSPACE')
         if(!workspace){
             throw new ClientError({
                 explaination:'Invalid data sent from the client',
@@ -111,11 +111,11 @@ const workspaceRepository={
 
           return workspace
     },
-    fetchAllWorkspaceByMemberId:async function(){
+    fetchAllWorkspaceByMemberId:async function(memberId){
         const workspaces=await Workspace.find({'members':{$elemMatch:{
              memberId:memberId
         }}}).populate('members.memberId','username email avatar')
-
+console.log("dekho jo stage 2 se retun hua hai",workspaces)
         return workspaces
 
     }

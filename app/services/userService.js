@@ -3,6 +3,7 @@ import userRepository from "../repositories/userRepository"
 import ClientError from "../utils/errors/clientErrors"
 import bcrypt from 'bcrypt'
 import { createJWT } from "../utils/common/authUtils"
+import ValidationError from "../utils/errors/validationError"
 export const signUpService=async(data)=>{
     try{
         const newUser=await userRepository.create(data)
