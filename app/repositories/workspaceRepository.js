@@ -42,6 +42,7 @@ const workspaceRepository={
     },
     addMemberToWorkspace:async function(workspaceId,memberId,role){
            
+        console.log(memberId,'see member bdcoe')
         const workspace=await Workspace.findById(workspaceId)
            console.log(workspace,'DEKHO WORKSPACE')
         if(!workspace){

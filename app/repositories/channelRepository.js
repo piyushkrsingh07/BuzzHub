@@ -4,7 +4,8 @@ import crudRepository from "./crudRepository"
 
 const channelRepository={
 
-    ...crudRepository(Channel)
+    ...crudRepository(Channel),
+
 }
 
 export default channelRepository

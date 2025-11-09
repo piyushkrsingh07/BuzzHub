@@ -40,7 +40,7 @@ export async function POST(request){
 
 
     }catch(error){
-             console.log(error)
+             console.log(error,'yha dekho catch hua ki nhi')
              if(error.statusCode){
                  return NextResponse.json(
                      {
