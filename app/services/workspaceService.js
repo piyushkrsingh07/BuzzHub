@@ -7,6 +7,7 @@ import { internalErrorResponse } from "../utils/common/responseObjects"
 import { StatusCodes } from "http-status-codes"
 import channelRepository from "../repositories/channelRepository"
 import ClientError from "../utils/errors/clientErrors"
+import userRepository from "../repositories/userRepository"
 
 
 
@@ -174,5 +175,67 @@ export const getWorkspaceByJoinCode=async(joincode,userId)=>{
     }catch(error){
         console.log('Get workspace by join code service error',error)
         throw error
+    }
+}
+
+export const updateWorkspaceService=async(workspaceId,workspaceData,userId)=>{
+   try{
+         const workspace=await workspaceRepository.getById(workspaceId)
+        if(workspace){
+            throw new ClientError({
+                explaination:'Invalid dta sent from the client',
+                message:'Workspace not found',
+                statusCode:StatusCodes.NOT_FOUND
+            })
+        }
+
+        const isAdmin=isUserAdminOfWorkspace(workspace,userId)
+        if(!isAdmin){
+            throw new ClientError({
+                explaination:'User is not an admin of the workspace',
+                message:'User is not an admin of the workspace',
+                statusCode:StatusCodes.UNAUTHORIZED
+            })
+        }
+
+        const updatedWorkspace=await workspaceRepository.update(workspaceId,workspaceData)
+
+        return updatedWorkspace
+   }catch(error){
+ console.log('failed to update the workspace',error)
+        throw error
+   }
+}
+
+export const addMemberToWorkspaceService=async(workspaceId,memberId,role)=>{
+    try{
+ const workspace=await workspaceRepository.getWorkspaceByJoinCode(joincode)
+        if(!workspace){
+            throw new ClientError({
+                explaination:'Invalid data sent from the client',
+                message:'Workspace not found',
+                statusCode:StatusCodes.NOT_FOUND
+            })
+        }
+      const isUserValid=await userRepository.getById(memberId)
+
+      if(!isUserValid){
+        throw new ClientError({
+            explaination:'User is not a member of the workspace',
+            message:'User is not a member of the workspace',
+            statusCode:StatusCodes.UNAUTHORIZED
+        })
+      }
+        const isMember=isUserMemberOfWorkspace(workspace,memberId)
+
+        if(isMember){
+            throw new ClientError({
+                explaination:'User is already a member of the workspace',
+                message:'User is already a member of the workspace',
+                statusCode:StatusCodes.UNAUTHORIZED
+            })
+        }
+    }catch(error){
+
     }
 }

@@ -1,6 +1,8 @@
 import { connect } from "@/app/config/serverConfig";
-import workspaceRepository from "@/app/repositories/workspaceRepository";
-import { customErrorResponse } from "@/app/utils/common/responseObjects";
+import { getWorkspaceByJoinCode } from "@/app/services/workspaceService";
+
+import { isAuthenticated } from "@/app/utils/common/authUtils";
+import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
@@ -14,6 +16,7 @@ export async function GET(request){
 const {searchParams}=new URL(request.url)
       
               const joincode=searchParams.get("joinCode") 
+              console.log(joincode," ",_id,"see join code and id")
 
 const response=await getWorkspaceByJoinCode(joincode,_id)
    
