@@ -6,7 +6,9 @@ export default function crudRepository(model){
         create:async function (data){
       try {
         console.log("📦 Creating new document:", data);
+
         const newDoc = await model.create(data);
+        console.log('dekhna new doc ko')
         return newDoc;
       } catch (err) {
         console.error("❌ Error creating document:", err);

@@ -1,32 +1,32 @@
 import { connect } from "@/app/config/serverConfig";
-import { getWorkspaceByJoinCode } from "@/app/services/workspaceService";
-
+import { addMemberToWorkspaceService } from "@/app/services/workspaceService";
 import { isAuthenticated } from "@/app/utils/common/authUtils";
 import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects";
+import { addMemberToWorkspaceSchema } from "@/app/validators/workspaceSchema";
+import { validate } from "@/app/validators/zodValidator";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 
-export async function GET(request){
-    try{
-      await connect()
 
-                const token=request.headers.get('x-access-token')
-      
-                        const authenticated=await isAuthenticated(token)
+export async function PUT(request){
+   try{
+     await connect()
+ const token=request.headers.get('x-access-token')
 
-                        const {_id}=authenticated
-const {searchParams}=new URL(request.url)
-      
-              const joincode=searchParams.get("joinCode") 
-              console.log(joincode," ",_id,"see join code and id")
+ const {searchParams}=new URL(request.url)
+ const workspaceId=searchParams.get('workspaceId')
+ const role=searchParams.get('role')
+ const memberId=searchParams.get('memberId') || 'members'
+ 
+const {_id}= await isAuthenticated(token)
 
-const response=await getWorkspaceByJoinCode(joincode,_id)
-   
-return NextResponse.json(successResponse(response,`Successfully fetched workspace for ${joincode}`),{ status:StatusCodes.OK })
-      
-    }catch(error){
-        console.log(error,'dekhna error kp')
-           if(error.statusCode){
+ await validate(addMemberToWorkspaceSchema,{memberId})
+const response=await addMemberToWorkspaceService(workspaceId,memberId,role,_id)
+
+return NextResponse.json(successResponse(response,`Successfully Updated members to workspace`),{ status:StatusCodes.OK })
+
+   }catch(error){
+ if(error.statusCode){
                                  return NextResponse.json(
                                     {
                                          message:customErrorResponse(error)
@@ -41,5 +41,5 @@ return NextResponse.json(successResponse(response,`Successfully fetched workspac
                                   { status:StatusCodes.INTERNAL_SERVER_ERROR }
                                
                              )
-    }
+   }
 }

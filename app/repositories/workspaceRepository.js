@@ -10,6 +10,13 @@ import channelRepository from "./channelRepository"
 
 const workspaceRepository={
     ...crudRepository(Workspace),
+    getWorkspaceDetailsById:async function (workspaceId){
+      const workspace=await Workspace.findById(workspaceId)
+       .populate('members.memberId','username email avatar')
+       .populate('channels')
+
+       return workspace
+    },
     getWorkspaceByName:async function(workspaceName){
         const workspace=await Workspace.findOne({
             name:workspaceName
@@ -85,7 +92,7 @@ const workspaceRepository={
     addChannelToWorkspace:async function(workspaceId,channelName){
         
         const workspace=await Workspace.findById(workspaceId).populate("channels")
-
+           console.log(workspace,'see workspace')
           if(!workspace){
             throw new ClientError({
                 explaination:'Invalid data sent from the client',
@@ -104,8 +111,8 @@ const workspaceRepository={
              })
           }
 
-          const channel=await channelRepository.create({name:channelName})
-
+          const channel=await channelRepository.create({name:channelName,workspaceId:workspaceId})
+console.log(channel,'dekho channel ko')
           workspace.channels.push(channel)
 
           await workspace.save()

@@ -2,38 +2,41 @@ import userRepository from '@/app/repositories/userRepository'
 import { StatusCodes } from 'http-status-codes'
 import jwt from 'jsonwebtoken'
 import { NextResponse } from 'next/server'
-import { internalErrorResponse } from './responseObjects'
+import { customErrorResponse, internalErrorResponse } from './responseObjects'
 
 export const isAuthenticated=async(token)=>{
 
     try{
      if(!token){
+        console.log("yha aa ya ki nhi aaya")
         return NextResponse.json(
-             {
-                    status:StatusCodes.FORBIDDEN
-                 },{
+            {
                 message:customErrorResponse({
                     explanation:'Invalid data sent from the client',
                     message:'No auth token provided'
                 })
-                             }
+                             },
+             {
+                    status:StatusCodes.FORBIDDEN
+                 }
                          )
      }
-
+console.log("checked if reached here")
      const response=await jwt.verify(token,process.env.JWT_SECRET)
 
-     if(!response){
-         return NextResponse.json(
-             {
-                    status:StatusCodes.FORBIDDEN
-                 },{
-                message:customErrorResponse({
-                    explanation:'Invalid data sent from the client',
-                    message:'No auth token provided'
-                })
-                             }
-                         )
-     }
+        if (!response) {
+      return NextResponse.json(
+        {
+          message: customErrorResponse({
+            explanation: "Invalid data sent from the client",
+            message: "No auth token provided",
+          }),
+        },
+        {
+          status: StatusCodes.FORBIDDEN,
+        }
+      );
+    }
 
      console.log(response,'dekho response at middleware')
      const user=await userRepository.getById(response.id)
@@ -43,23 +46,28 @@ export const isAuthenticated=async(token)=>{
     }catch(error){
         console.log('Auth middleware error',error)
         if(error.name === 'JsonWebTokenError'){
-           return NextResponse.json(
-             {
-                    status:StatusCodes.FORBIDDEN
-                 },{
-                message:customErrorResponse({
-                    explanation:'Invalid data sent from the client',
-                    message:'No auth token provided'
-                })
-                             }
-                         )
+            return NextResponse.json(
+        {
+          message: customErrorResponse({
+            explanation: "Invalid data sent from the client",
+            message: "No auth token provided",
+          }),
+        },
+        {
+          status: StatusCodes.FORBIDDEN,
+        }
+      );
 
                                   
         }
 
             return NextResponse.json(
-      { status:StatusCodes.INTERNAL_SERVER_ERROR },
- {message:internalErrorResponse(error)}
+    
+       {
+        message: internalErrorResponse(error),
+      },
+      { status:StatusCodes.INTERNAL_SERVER_ERROR }
+
           )
     }
 
