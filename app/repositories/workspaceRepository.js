@@ -87,6 +87,7 @@ const workspaceRepository={
 
         await workspace.save()
 
+        1
         return workspace
     },
     addChannelToWorkspace:async function(workspaceId,channelName){

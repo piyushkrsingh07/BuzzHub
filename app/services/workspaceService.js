@@ -23,7 +23,7 @@ const isUserAdminOfWorkspace=(workspace,userId)=>{
        return workspace.members.find((member)=>(member.memberId?._id.toString() === userId.toString() ||member.memberId.toString() === userId.toString() ) && member.role === 'admin')
 }
 
-const isUserMemberOfWorkspace=(workspace,userId)=>{
+export const isUserMemberOfWorkspace=(workspace,userId)=>{
     return workspace.members.find((member)=>member.memberId.toString() === userId.toString())
 }
 

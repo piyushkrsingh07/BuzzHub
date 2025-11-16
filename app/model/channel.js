@@ -1,6 +1,6 @@
 
 import mongoose from "mongoose";
-
+import Workspace from "../model/workspace"
 const channelSchema=new mongoose.Schema({
     name:{
         type:String,
