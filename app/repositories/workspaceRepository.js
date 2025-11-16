@@ -127,6 +127,13 @@ console.log(channel,'dekho channel ko')
 console.log("dekho jo stage 2 se retun hua hai",workspaces)
         return workspaces
 
+    },
+    deleteAllWorkspaceChannels:async function(workspaceId){
+        const workspace=await Workspace.updateOne({_id:workspaceId},
+            {$unset:{channels:1}}
+        )
+
+        return workspace
     }
 }
 

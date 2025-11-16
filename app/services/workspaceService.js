@@ -351,3 +351,37 @@ export const addChannelToWorkspaceService=async(workspaceId,channelName,userId)=
         throw error
     }
 }
+
+export const deleteAllWorkspaceChannel=async(workspaceId,userId)=>{
+    try{
+
+        const workspace=await workspaceRepository.getById(workspaceId)
+
+        console.log(workspace,'see workspace here ')
+           
+        if(!workspace){
+            throw new ClientError({
+                explaination:'Invalid data sent from the client',
+            message:'Workspace not found',
+            statusCode:StatusCodes.NOT_FOUND
+            })
+        }
+
+   const isAllowed=isUserAdminOfWorkspace(workspace,userId)
+
+   if(isAllowed){
+    const response=await workspaceRepository.deleteAllWorkspaceChannels(workspace)
+    return response
+
+   }
+throw new ClientError({
+    explaination:'User is either not a member or admin of workspace',
+    message:'User is not allowed to delete the workspace',
+    StatusCodes:StatusCodes.UNAUTHORIZED
+})
+       
+    }catch(error){
+        console.log('deleting all workspaces channels',error)
+        throw error
+    }
+}

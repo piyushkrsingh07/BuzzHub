@@ -8,7 +8,8 @@ const channelRepository={
     getChannelWithWorkspaceDetails:async function (channelId){
         const channel=await Channel.findById(channelId).populate('workspaceId')
         return channel
-    }
+    },
+    
 
 }
 
