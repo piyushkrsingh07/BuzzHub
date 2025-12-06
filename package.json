@@ -9,13 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@upstash/qstash": "^2.8.4",
     "bcrypt": "^6.0.0",
+    "bull": "^4.16.5",
+    "bullmq": "^5.65.1",
     "http-status-codes": "^2.3.0",
+    "ioredis": "^5.8.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.1",
-    "next": "15.5.4",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "^15.5.7",
+    "nodemailer": "^7.0.10",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "uuid": "^13.0.0",
     "zod": "^4.1.12"
   },
@@ -23,7 +28,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "15.5.4",
+    "eslint-config-next": "^15.5.7",
     "tailwindcss": "^4"
   }
 }

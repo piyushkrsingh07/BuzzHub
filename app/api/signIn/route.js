@@ -1,3 +1,4 @@
+// import { mailResponse } from "@/app/config/mailConfig"
 import { connect } from "@/app/config/serverConfig"
 import { signInService } from "@/app/services/userService"
 import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects"
@@ -14,6 +15,10 @@ export async function POST(request){
         //    const parsedData=await JSON.parse(body)
             // console.log(parsedData,'dekho parsed data ') 
            const response=await signInService(body)
+
+        //    const sendMail=await mailResponse()
+        //    console.log(sendMail,'dekho mail sent or not')
+        //    console.log(typeof sendMail,'see type of send mail')
 
                   console.log(response,'dekho userlogged in')
                   return NextResponse.json(successResponse(response,'User logged in successfully'),{ status:StatusCodes.OK })

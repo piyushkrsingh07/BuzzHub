@@ -8,7 +8,9 @@ import { StatusCodes } from "http-status-codes"
 import channelRepository from "../repositories/channelRepository"
 import ClientError from "../utils/errors/clientErrors"
 import userRepository from "../repositories/userRepository"
-import { channel } from "diagnostics_channel"
+
+
+
 
 
 
@@ -19,7 +21,7 @@ const isUserAdminOfWorkspace=(workspace,userId)=>{
   "userId:", userId.toString()
 )
 
-    console.log(workspace.members.some((member)=>member.memberId._id.toString() === userId.toString() && member.role === 'admin'),'yha error hoga pkka')
+    // console.log(workspace.members.some((member)=>member.memberId._id.toString() === userId.toString() && member.role === 'admin'),'yha error hoga pkka')
        return workspace.members.find((member)=>(member.memberId?._id.toString() === userId.toString() ||member.memberId.toString() === userId.toString() ) && member.role === 'admin')
 }
 
@@ -174,6 +176,7 @@ export const getWorkspaceByJoinCode=async(joincode,userId)=>{
             })
         }
 
+
         const isMember=isUserMemberOfWorkspace(workspace,userId)
 
         if(!isMember){
@@ -296,7 +299,11 @@ if(!isAdmin){
 }
 const response=await workspaceRepository.addMemberToWorkspace(workspaceId,memberId,role)
 
-return response
+
+
+
+
+return {response,mail:isValidUser.email}
     }catch(error){
          console.log('failed to update the workspace',error)
         throw error
