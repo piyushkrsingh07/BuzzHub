@@ -11,12 +11,12 @@ export const revalidate = 0;
 export async function POST(request){
      try{
              const receiverMailId = request.nextUrl.searchParams.get("to");
-    console.log(receiverMailId, "see receiver mail id");
-                console.log(receiverMailId,'see receiver mail id')
+    // console.log(receiverMailId, "see receiver mail id");
+    //             console.log(receiverMailId,'see receiver mail id')
               // const getUser=await userRepository.getByEmail(receiverMailId)
               const user=await userRepository.getByEmail(receiverMailId)
 
-              console.log(user,'see user befoe sending the mail')
+              // console.log(user,'see user befoe sending the mail')
 
               const mailOptions={
     from:process.env.MAIL_ID,

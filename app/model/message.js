@@ -1,12 +1,12 @@
 import { channel } from "diagnostics_channel";
 import mongoose from "mongoose";
-import { required } from "zod/v4/core/util.cjs";
+
 import Workspace from "./workspace";
 
 const messageSchema=new mongoose.Schema({
     body:{
         type:String,
-        required:[true,'Message body is required']
+        required:[true,'Message body is required'] //plainning to create a substring match for finding a message
     },
     image:{
         type:String

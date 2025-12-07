@@ -8,7 +8,7 @@ export const triggerQStash=async(payload)=>{
     try{
 console.log(payload,'see sent payload')
         const response=await qstashClient.publishJSON({
-            url:`https://buzz-hub-one.vercel.app/api/sendMail?to=${payload.to}`,
+            url:`https://0e9eb2f29b7b.ngrok-free.app/api/sendMail?to=${payload.to}`,
             body:{
                user:payload.name,
                uniqueMail:Date.now()
