@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+
+    "dev": "node server.js",
     "build": "next build --turbopack",
-    "start": "next start",
+ 
+    "start": "NODE_ENV=production node server.js",
     "lint": "eslint"
   },
   "dependencies": {
@@ -21,6 +23,7 @@
     "nodemailer": "^7.0.10",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "socket.io": "^4.8.1",
     "uuid": "^13.0.0",
     "zod": "^4.1.12"
   },
@@ -30,5 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "^15.5.7",
     "tailwindcss": "^4"
-  }
+  },
+    "type":"module"
+  
 }

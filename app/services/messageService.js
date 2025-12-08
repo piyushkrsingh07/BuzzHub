@@ -28,3 +28,5 @@ export const getMessageService = async(messageParams,page,limit,userId)=>{
     )
     return messages
 }
+
+// client <----------> server
