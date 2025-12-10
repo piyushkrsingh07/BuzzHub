@@ -4,6 +4,8 @@ import messageRepository from "../repositories/messageRepository.js"
 import ClientError from "../utils/errors/clientErrors.js"
 import { isMemberPartOfWorkspace } from "./memberService.js"
 import { isUserMemberOfWorkspace } from "./workspaceService.js"
+import { NEW_MESSAGE_EVENT, NEW_MESSAGE_RECEIVED_EVENT } from "../utils/common/eventConstants.js"
+import { connect } from "../config/serverConfig.js"
 
 export const getMessageService = async(messageParams,page,limit,userId)=>{
 
@@ -31,10 +33,6 @@ export const getMessageService = async(messageParams,page,limit,userId)=>{
 
 // client <----------> server
 
-export default function messageHandlers(io,socket){
-        socket.on('messageFromClient',(data)=>{
-      console.log('Message from client',data)
 
-      io.emit('new message',data.toUpperCase())
-    })
-}
+
+

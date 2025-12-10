@@ -2,8 +2,11 @@ import {createServer} from "node:http"
 
 import next from "next"
 import { Server } from "socket.io"
+import MessageSocketHandlers from "./app/socketControllers/messageSocketController.js"
 
-import messageHandlers from "./app/services/messageService.js"
+import ChannelSocketHandlers from "./app/socketControllers/channelSocketController.js"
+
+
 
 
 const dev=process.env.NODE_ENV !== 'production'
@@ -24,7 +27,8 @@ app.prepare().then(()=>{
         setTimeout(()=>{
          socket.emit('message','This is the message from the server') //server is sending the data
         },3000)
-messageHandlers(io,socket)
+MessageSocketHandlers(io,socket)
+ChannelSocketHandlers(io,socket)
     })
 
     

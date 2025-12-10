@@ -9,7 +9,7 @@ export async function GET (request){
       await connect()
       const {searchParams}=new URL(request.url)
       
-      
+ 
 
               const channelId=searchParams.get('channelId')
 
