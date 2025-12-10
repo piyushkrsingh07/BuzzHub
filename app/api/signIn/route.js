@@ -1,7 +1,7 @@
 // import { mailResponse } from "@/app/config/mailConfig"
-import { connect } from "@/app/config/serverConfig"
-import { signInService } from "@/app/services/userService"
-import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects"
+import { connect } from "@/app/config/serverConfig.js"
+import { signInService } from "@/app/services/userService.js"
+import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects.js"
 import { StatusCodes } from "http-status-codes"
 import { NextResponse } from "next/server"
 

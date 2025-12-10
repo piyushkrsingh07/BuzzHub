@@ -1,11 +1,11 @@
 import { StatusCodes } from "http-status-codes"
-import Workspace from "../model/workspace"
-import ClientError from "../utils/errors/clientErrors"
-import crudRepository from "./crudRepository"
-import User from "../model/user"
-import { channel } from "diagnostics_channel"
-import Channel from "../model/channel"
-import channelRepository from "./channelRepository"
+import Workspace from "../model/workspace.js"
+import ClientError from "../utils/errors/clientErrors.js"
+import crudRepository from "./crudRepository.js"
+import User from "../model/user.js"
+
+import Channel from "../model/channel.js"
+import channelRepository from "./channelRepository.js"
 
 
 const workspaceRepository={

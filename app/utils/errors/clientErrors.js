@@ -1,4 +1,5 @@
-const { StatusCodes } = require("http-status-codes");
+import { StatusCodes } from "http-status-codes";
+
 
 class ClientError extends Error {
     constructor(error){

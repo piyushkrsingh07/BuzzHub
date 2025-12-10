@@ -1,4 +1,4 @@
-import User from "../model/user";
+import User from "../model/user.js";
 
 export default function crudRepository(model){
     return {

@@ -1,13 +1,13 @@
 
-import workspaceRepository from "../repositories/workspaceRepository"
+import workspaceRepository from "../repositories/workspaceRepository.js"
 import {v4 as uuidv4} from 'uuid'
-import ValidationError from "../utils/errors/validationError"
-import { NextResponse } from "next/server"
-import { internalErrorResponse } from "../utils/common/responseObjects"
+import ValidationError from "../utils/errors/validationError.js"
+
+import { internalErrorResponse } from "../utils/common/responseObjects.js"
 import { StatusCodes } from "http-status-codes"
-import channelRepository from "../repositories/channelRepository"
-import ClientError from "../utils/errors/clientErrors"
-import userRepository from "../repositories/userRepository"
+import channelRepository from "../repositories/channelRepository.js"
+import ClientError from "../utils/errors/clientErrors.js"
+import userRepository from "../repositories/userRepository.js"
 
 
 

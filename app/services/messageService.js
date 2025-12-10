@@ -1,9 +1,9 @@
 import { StatusCodes } from "http-status-codes"
-import channelRepository from "../repositories/channelRepository"
-import messageRepository from "../repositories/messageRepository"
-import ClientError from "../utils/errors/clientErrors"
-import { isMemberPartOfWorkspace } from "./memberService"
-import { isUserMemberOfWorkspace } from "./workspaceService"
+import channelRepository from "../repositories/channelRepository.js"
+import messageRepository from "../repositories/messageRepository.js"
+import ClientError from "../utils/errors/clientErrors.js"
+import { isMemberPartOfWorkspace } from "./memberService.js"
+import { isUserMemberOfWorkspace } from "./workspaceService.js"
 
 export const getMessageService = async(messageParams,page,limit,userId)=>{
 
@@ -30,3 +30,11 @@ export const getMessageService = async(messageParams,page,limit,userId)=>{
 }
 
 // client <----------> server
+
+export default function messageHandlers(io,socket){
+        socket.on('messageFromClient',(data)=>{
+      console.log('Message from client',data)
+
+      io.emit('new message',data.toUpperCase())
+    })
+}

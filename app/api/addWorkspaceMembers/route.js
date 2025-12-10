@@ -1,11 +1,11 @@
-import { connect } from "@/app/config/serverConfig";
-import { addMemberToWorkspaceService } from "@/app/services/workspaceService";
-import { isAuthenticated } from "@/app/utils/common/authUtils";
-import workspaceJoinMail from "@/app/utils/common/mailObject";
-import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects";
-import { addMemberToWorkspaceSchema } from "@/app/validators/workspaceSchema";
-import { validate } from "@/app/validators/zodValidator";
-import { triggerQStash } from "@/queues/mailQueque";
+import { connect } from "@/app/config/serverConfig.js";
+import { addMemberToWorkspaceService } from "@/app/services/workspaceService.js";
+import { isAuthenticated } from "@/app/utils/common/authUtils.js";
+import workspaceJoinMail from "@/app/utils/common/mailObject.js";
+import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects.js";
+import { addMemberToWorkspaceSchema } from "@/app/validators/workspaceSchema.js";
+import { validate } from "@/app/validators/zodValidator.js";
+import { triggerQStash } from "@/queues/mailQueque.js";
 import { StatusCodes } from "http-status-codes";
 import { NextResponse } from "next/server";
 

@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes"
-import channelRepository from "../repositories/channelRepository"
-import ClientError from "../utils/errors/clientErrors"
-import { isUserMemberOfWorkspace } from "./workspaceService"
+import channelRepository from "../repositories/channelRepository.js"
+import ClientError from "../utils/errors/clientErrors.js"
+import { isUserMemberOfWorkspace } from "./workspaceService.js"
 
 export const getChannelById=async(channelId,userId)=>{
     try{

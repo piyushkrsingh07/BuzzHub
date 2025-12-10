@@ -1,7 +1,7 @@
-import { connect } from "@/app/config/serverConfig"
-import { isMemberPartOfWorkspace } from "@/app/services/memberService"
-import { isAuthenticated } from "@/app/utils/common/authUtils"
-import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects"
+import { connect } from "@/app/config/serverConfig.js"
+import { isMemberPartOfWorkspace } from "@/app/services/memberService.js"
+import { isAuthenticated } from "@/app/utils/common/authUtils.js"
+import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects.js"
 import { StatusCodes } from "http-status-codes"
 import { NextResponse } from "next/server"
 

@@ -1,5 +1,5 @@
-import Channel from "../model/channel"
-import crudRepository from "./crudRepository"
+import Channel from "../model/channel.js"
+import crudRepository from "./crudRepository.js"
 
 
 const channelRepository={

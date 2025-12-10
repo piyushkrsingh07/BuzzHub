@@ -1,6 +1,6 @@
-import { transporter } from "@/app/config/mailConfig";
-import userRepository from "@/app/repositories/userRepository";
-import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects"
+import { transporter } from "@/app/config/mailConfig.js";
+import userRepository from "@/app/repositories/userRepository.js";
+import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects.js"
 import { StatusCodes } from "http-status-codes"
 import { NextResponse } from "next/server"
 

@@ -1,9 +1,9 @@
 import { StatusCodes } from "http-status-codes"
-import userRepository from "../repositories/userRepository"
-import ClientError from "../utils/errors/clientErrors"
+import userRepository from "../repositories/userRepository.js"
+import ClientError from "../utils/errors/clientErrors.js"
 import bcrypt from 'bcrypt'
-import { createJWT } from "../utils/common/authUtils"
-import ValidationError from "../utils/errors/validationError"
+import { createJWT } from "../utils/common/authUtils.js"
+import ValidationError from "../utils/errors/validationError.js"
 export const signUpService=async(data)=>{
     try{
         const newUser=await userRepository.create(data)

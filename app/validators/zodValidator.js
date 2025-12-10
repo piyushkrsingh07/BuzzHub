@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes"
-import { customErrorResponse } from "../utils/common/responseObjects"
+import { customErrorResponse } from "../utils/common/responseObjects.js"
 import { NextResponse } from "next/server"
 
 export const validate=async(schema,data)=>{

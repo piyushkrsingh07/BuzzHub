@@ -1,6 +1,6 @@
-import { connect } from "@/app/config/serverConfig"
-import { getMessageService } from "@/app/services/messageService"
-import { successResponse } from "@/app/utils/common/responseObjects"
+import { connect } from "@/app/config/serverConfig.js"
+import { getMessageService } from "@/app/services/messageService.js"
+import { successResponse } from "@/app/utils/common/responseObjects.js"
 import { StatusCodes } from "http-status-codes"
 import { NextResponse } from "next/server"
 

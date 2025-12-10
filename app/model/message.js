@@ -1,7 +1,7 @@
-import { channel } from "diagnostics_channel";
+
 import mongoose from "mongoose";
 
-import Workspace from "./workspace";
+import Workspace from "./workspace.js";
 
 const messageSchema=new mongoose.Schema({
     body:{

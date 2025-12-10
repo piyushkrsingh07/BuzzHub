@@ -1,8 +1,8 @@
-import userRepository from '@/app/repositories/userRepository'
+import userRepository from '@/app/repositories/userRepository.js'
 import { StatusCodes } from 'http-status-codes'
 import jwt from 'jsonwebtoken'
 import { NextResponse } from 'next/server'
-import { customErrorResponse, internalErrorResponse } from './responseObjects'
+import { customErrorResponse, internalErrorResponse } from './responseObjects.js'
 
 export const isAuthenticated=async(token)=>{
 

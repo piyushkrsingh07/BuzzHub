@@ -1,5 +1,5 @@
-import User from "../model/user"
-import crudRepository from "./crudRepository"
+import User from "../model/user.js"
+import crudRepository from "./crudRepository.js"
 
 const userRepository={
     ...crudRepository(User),

@@ -3,6 +3,9 @@ import {createServer} from "node:http"
 import next from "next"
 import { Server } from "socket.io"
 
+import messageHandlers from "./app/services/messageService.js"
+
+
 const dev=process.env.NODE_ENV !== 'production'
 const hostname='localhost'
 const port=3000;
@@ -21,12 +24,7 @@ app.prepare().then(()=>{
         setTimeout(()=>{
          socket.emit('message','This is the message from the server') //server is sending the data
         },3000)
-
-        socket.on('messageFromClient',(data)=>{
-      console.log('Message from client',data)
-
-      io.emit('new message',data.toUpperCase())
-    })
+messageHandlers(io,socket)
     })
 
     

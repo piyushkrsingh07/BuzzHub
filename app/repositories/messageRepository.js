@@ -1,8 +1,8 @@
 
-import Message from "../model/message"
-import crudRepository from "./crudRepository"
+import Message from "../model/message.js"
+import crudRepository from "./crudRepository.js"
 
-import User from "../model/user"
+import User from "../model/user.js"
 
 
 const messageRepository = {
