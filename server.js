@@ -17,7 +17,19 @@ app.prepare().then(()=>{
 
     io.on('connection',(socket)=>{
         console.log(`User connected :${socket.id}`)
+
+        setTimeout(()=>{
+         socket.emit('message','This is the message from the server') //server is sending the data
+        },3000)
+
+        socket.on('messageFromClient',(data)=>{
+      console.log('Message from client',data)
+
+      io.emit('new message',data.toUpperCase())
     })
+    })
+
+    
 
   
   httpServer
