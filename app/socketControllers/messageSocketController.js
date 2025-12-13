@@ -19,11 +19,14 @@ export default async function messageHandlers (io,socket){
     console.log(data,typeof data,'see data received')
 
     const {channelId}=data;
-const messageResponse=await createMessageService(JSON.parse(data));
+const messageResponse=await createMessageService(data);
 // socket.broadcast.emit(NEW_MESSAGE_RECEIVED_EVENT,messageResponse) to emit to every user 
 
 console.log(messageResponse,'see message response')
-io.to(channelId).emit(NEW_MESSAGE_RECEIVED_EVENT,messageResponse);
+
+console.log(channelId,'dekho channel')
+console.log(channelId.toString(),'see channelId in string')
+io.to(channelId.toString()).emit(NEW_MESSAGE_RECEIVED_EVENT,messageResponse);
 cb({
     success:true,
     message:'Successfully created the message',
