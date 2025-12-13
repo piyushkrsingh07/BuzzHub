@@ -13,7 +13,7 @@ const messageSchema=new mongoose.Schema({
     },
     channelId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Chaneel',
+        ref:'Channel',
         required:[true,'Channel ID is required']
     },
     senderId:{
