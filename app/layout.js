@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
   <main className="min-h-screen"> {children}</main>
         <Toaster richColors/>
         </ClientOnly>
-        {children}
+     
       </body>
     </html>
   );
