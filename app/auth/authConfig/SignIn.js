@@ -5,7 +5,7 @@ export const signInRequest=async({email,password})=>{
        const response=await axios.post('/api/signIn',{
         email,
         password,
-
+         
        })
        return response.data
     }catch(error){

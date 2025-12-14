@@ -3,10 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 
 
 export const useSignIn=()=>{
-    const {isPending,isSuccess,error,mutate:signInMutation} = useMutation({         //on calling the mutate function the use mutation is going to trigger
+    const {isPending,isSuccess,error,mutateAsync:signInMutation} = useMutation({         //on calling the mutate function the use mutation is going to trigger
         mutationFn:signInRequest,
         onSuccess:(data)=>{
-            console.log("Successfully signup",data)
+            console.log("Successfully signin",data)
         },
         onError:(error)=>[
             console.error('Failed to sign up')
@@ -17,6 +17,7 @@ export const useSignIn=()=>{
         isPending,
         isSuccess,
         error,
-       signInMutation
+       signInMutation,
+       
     }
 }

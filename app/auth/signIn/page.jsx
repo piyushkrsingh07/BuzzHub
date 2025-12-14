@@ -1,6 +1,6 @@
 'use client'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import z from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { useRouter } from 'next/navigation'
+import { useSignIn } from '@/app/hooks/auth/useSignIn'
+import { toast } from 'sonner'
 
 const signInSchema=z.object({
     email:z.string().trim().min(4,{message:"Invalid email"}).max(30,{message:"Invalid email"}),
@@ -44,10 +46,27 @@ defaultValues:{
 
     const router=useRouter()
 
+          const {isPending,isSuccess,error,signInMutation}=useSignIn()
 
      const onSubmit=async(data)=>{
-        console.log(data,'see data from signup form')
+        console.log(data,'see data from signin form')
+
+ 
+
+     await signInMutation(data)
+
      }
+
+        useEffect(()=>{
+      
+        if(!isSuccess) return
+   
+        toast.success('Successfully signed in')
+           const timer= setTimeout(()=>router.push('/auth/signIn'),5000)
+              return ()=>clearTimeout(timer)
+        
+     
+     },[isSuccess])
   return (
      <Card className="w-full h-full ">
       <CardHeader>
