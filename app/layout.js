@@ -4,6 +4,7 @@ import ClientOnly from "./clientOnly";
 import { Toaster } from "sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import QueryProvider from "./provider/QueryClientProvider";
+import { AppContextProvider } from "./context/AppContextProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,11 +31,12 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
          <QueryProvider>
-
+          <AppContextProvider>
         <ClientOnly>
   <main className="min-h-screen"> {children}</main>
         <Toaster richColors/>
         </ClientOnly>
+        </AppContextProvider>
      </QueryProvider>
       </body>
       
