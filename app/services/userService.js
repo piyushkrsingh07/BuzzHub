@@ -27,6 +27,7 @@ export const signUpService=async(data)=>{
             'A user with same email or username already exists'
         )
        }
+       throw error 
     }
 }
 

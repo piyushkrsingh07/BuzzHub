@@ -20,15 +20,17 @@ export async function POST(request){
     if(error.statusCode){
         return NextResponse.json(
             {
-                status:error.statusCode
-            },{
                 message:customErrorResponse(error)
-            }
+            },
+            {
+                status:error.statusCode
+            },
         )
     }
     return NextResponse.json(
+         {message:internalErrorResponse(error)},
          { status:StatusCodes.INTERNAL_SERVER_ERROR },
-         {message:internalErrorResponse(error)}
+        
     )
    }
 }

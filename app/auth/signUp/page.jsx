@@ -69,7 +69,12 @@ defaultValues:{
 
      useEffect(()=>{
       
-        if(!isSuccess) return
+        if(!isSuccess) {
+          console.log(error,typeof error,' see jo error ayaya ')
+     
+          return
+        }
+
 
         toast.success('Successfully signup up')
            const timer= setTimeout(()=>router.push('/auth/signIn'),5000)
@@ -77,6 +82,12 @@ defaultValues:{
         
      
      },[isSuccess])
+
+     const errorMessage =
+  typeof error === "string"
+    ? error
+    : error?.message?.message || error?.message || "Something went wrong"
+
   return (
      <Card className="w-full h-full ">
       <CardHeader>
@@ -85,9 +96,9 @@ defaultValues:{
 
         {
             error && (
-                <div>
-                    <TriangleAlertIcon className='size-5' />
-                    <p>{error.message}</p>
+                <div className='bg-destructive/15 py-4 pr-2 pl-1 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6'>
+                    <TriangleAlertIcon className='size-12 text-red-500' />
+                    <p>{errorMessage}</p>
                 </div>
             )
         }
