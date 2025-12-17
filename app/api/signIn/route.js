@@ -4,6 +4,7 @@ import { signInService } from "@/app/services/userService.js"
 import { customErrorResponse, internalErrorResponse, successResponse } from "@/app/utils/common/responseObjects.js"
 import { StatusCodes } from "http-status-codes"
 import { NextResponse } from "next/server"
+import { cookies } from "next/headers"
 
 export async function POST(request){
     try{
@@ -15,7 +16,10 @@ export async function POST(request){
         //    const parsedData=await JSON.parse(body)
             // console.log(parsedData,'dekho parsed data ') 
            const response=await signInService(body)
-
+            const {token}=response  
+         cookies().set("token", token, {
+      expires: new Date(Date.now() + 8 * 3600000),
+    });
         //    const sendMail=await mailResponse()
         //    console.log(sendMail,'dekho mail sent or not')
         //    console.log(typeof sendMail,'see type of send mail')
