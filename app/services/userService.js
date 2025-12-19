@@ -54,6 +54,7 @@ const user=await userRepository.getByEmail(data.email)
 
        // match the incoming password with the hashed password
          return {
+            userId:user._id,
             username:user.username,
             avatar:user.avatar,
             email:user.email,

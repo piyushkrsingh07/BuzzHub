@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query"
 import { useAuth } from "../auth/useAuth"
-import { createWorkspaceRequest } from "@/app/(main)/workspace/workspaceConfig/Workspace"
+import { createWorkspaceRequest } from "@/app/home/workspaceConfig/Workspace"
 
 export const useCreateWorkspace=()=>{
     const {auth}=useAuth()
@@ -11,7 +11,7 @@ export const useCreateWorkspace=()=>{
             console.log('Successfully created workspace',data)
         },
         onError:(error)=>{
-            console.log('Failed to creat workspace',error)
+            console.log('Failed to create workspace',error)
         }
     })
 

@@ -1,5 +1,5 @@
 import axios from "@/app/config/axiosConfig"
-import { useAuth } from "@/app/hooks/auth/useAuth"
+
 
 export const createWorkspaceRequest =async({name,description,token})=>{
 
@@ -18,6 +18,22 @@ export const createWorkspaceRequest =async({name,description,token})=>{
         return response.data
     }catch(error){
         console.log('Error in create workspace request',error)
+        throw error.response.data
+    }
+}
+
+export const fetchWorkspacesRequest = async({auth,token})=>{
+    try{
+        console.log("checking userId received",auth?.user?.userId)
+        const response=await axios.get(`/api/getUserWorkspaces?userId=${auth?.user?.userId}`,{
+            headers:{
+                'x-access-token':token
+            }
+        })
+                console.log('Response in getWorkspace',response)
+        return response.data
+    }catch(error){
+       console.log('Error in get workspace request',error)
         throw error.response.data
     }
 }

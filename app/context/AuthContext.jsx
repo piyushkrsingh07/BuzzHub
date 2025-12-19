@@ -1,11 +1,14 @@
 'use client'
 import { deleteCookie } from "cookies-next"
+import { useRouter } from "next/navigation"
 
 import {  createContext, useEffect, useState } from "react"
 
 const AuthContext=createContext()
 
 export const AuthContextProvider=({children})=>{
+
+    const router=useRouter()
 
     const [auth,setAuth]=useState({
         user:null,
@@ -18,6 +21,7 @@ export const AuthContextProvider=({children})=>{
         const user=localStorage.getItem('user')
         const token=localStorage.getItem('token')
 
+        console.log(user,token,'see user and token in auth provider')
         if(user && token){
             setAuth({
                 user:JSON.parse(user),
@@ -25,7 +29,7 @@ export const AuthContextProvider=({children})=>{
                 isLoading:false
             })
         }
-      },[])
+      },[router])
 
       async function logout (){
         localStorage.removeItem('user')
@@ -38,6 +42,7 @@ export const AuthContextProvider=({children})=>{
                 isLoading:false
           
         })
+        router.refresh()
     
 }
 

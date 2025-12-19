@@ -14,10 +14,11 @@ export const useSignIn=()=>{
             console.log(response.data.token,typeof response.data.token,'seeing token')
             localStorage.setItem('token',response.data.token)
             console.log('local storage success')
-            
+
+
         },
         onError:(error)=>[
-            console.error('Failed to sign up')
+            console.error('Failed to sign up',error)
         ]
     })
 

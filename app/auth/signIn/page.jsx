@@ -12,6 +12,7 @@ import { Separator } from '@/components/ui/separator'
 import { useRouter } from 'next/navigation'
 import { useSignIn } from '@/app/hooks/auth/useSignIn'
 import { toast } from 'sonner'
+import { useAuth } from '@/app/hooks/auth/useAuth'
 
 const signInSchema=z.object({
     email:z.string().trim().min(4,{message:"Invalid email"}).max(30,{message:"Invalid email"}),
@@ -45,6 +46,7 @@ defaultValues:{
     })
 
     const router=useRouter()
+    const {auth}=useAuth()
 
           const {isPending,isSuccess,error,signInMutation}=useSignIn()
 
@@ -59,14 +61,18 @@ defaultValues:{
 
         useEffect(()=>{
       
-        if(!isSuccess) return
-   
+      console.log(auth,'checking auth received here in signin first')
+         if (!isSuccess) return
+
+  
+        console.log(auth,'checking auth received here in signin last')
+           
         toast.success('Successfully signed in')
            const timer= setTimeout(()=>router.push('/home'),5000)
               return ()=>clearTimeout(timer)
         
      
-     },[isSuccess])
+     },[isSuccess,auth?.token])
   return (
      <Card className="w-full h-full ">
       <CardHeader>
