@@ -13,10 +13,10 @@ export const useSignUp=()=>{
             console.log("Successfully signup",data)
             
         },
-        onError:(error)=>[
+        onError:(error)=>{
          
             toast.error(`Failed to sign up ${error?.message?.message || error?.message || "Something went wrong"}`)
-        ]
+        }
     })
 
     return {
