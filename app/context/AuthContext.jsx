@@ -1,4 +1,6 @@
 'use client'
+import { deleteCookie } from "cookies-next"
+
 import {  createContext, useEffect, useState } from "react"
 
 const AuthContext=createContext()
@@ -25,8 +27,22 @@ export const AuthContextProvider=({children})=>{
         }
       },[])
 
+      async function logout (){
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+             deleteCookie('token')
+     
+            setAuth({
+                user:null ,
+                token:null,
+                isLoading:false
+          
+        })
+    
+}
+
     return (
-        <AuthContext.Provider value={{auth,setAuth}}>
+        <AuthContext.Provider value={{auth,setAuth,logout}}>
              {children}
         </AuthContext.Provider>
     )

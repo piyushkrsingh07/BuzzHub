@@ -34,6 +34,7 @@ export default function RootLayout({ children }) {
           <AppContextProvider>
         <ClientOnly>
   <main className="min-h-screen"> {children}</main>
+
         <Toaster richColors/>
         </ClientOnly>
         </AppContextProvider>

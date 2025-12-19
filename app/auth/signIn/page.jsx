@@ -54,7 +54,7 @@ defaultValues:{
  
 
      await signInMutation(data)
-
+       
      }
 
         useEffect(()=>{
@@ -62,7 +62,7 @@ defaultValues:{
         if(!isSuccess) return
    
         toast.success('Successfully signed in')
-           const timer= setTimeout(()=>router.push('/auth/signIn'),5000)
+           const timer= setTimeout(()=>router.push('/home'),5000)
               return ()=>clearTimeout(timer)
         
      
