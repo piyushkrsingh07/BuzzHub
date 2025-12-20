@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 
-const protectedRoute=['/home']
+const protectedRoute=['/home','/workspace']
 
 
 

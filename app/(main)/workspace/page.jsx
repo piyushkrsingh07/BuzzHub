@@ -1,11 +1,16 @@
 
-
 import React from 'react'
+import WorkspaceSideBar from "./_components/WorkspaceSideBar"
 
-const WorkSpace = () => {
+const WorkspaceLayout = ({children}) => {
   return (
-    <div>WorkSpace</div>
+     <div className="h-[100vh]"> 
+        <div className="flex h-full">
+          <WorkspaceSideBar/>
+          {children}
+        </div>
+    </div>
   )
 }
 
-export default WorkSpace
+export default WorkspaceLayout

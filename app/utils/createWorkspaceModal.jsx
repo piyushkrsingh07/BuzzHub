@@ -1,6 +1,6 @@
 'use client'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/@/components/ui/dialog'
-import React from 'react'
+
+import React, { useEffect } from 'react'
 import { useCreateWorkspaceModal } from '../hooks/workspaces/useCreateWorkspaceModal'
 import { Input } from '@/components/ui/input'
 import { useCreateWorkspace } from '../hooks/workspaces/useCreateWorkspace'
@@ -9,6 +9,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import z from 'zod/v3'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { useRouter } from 'next/navigation'
 
 
 const workspaceSchema=z.object({
@@ -18,7 +20,7 @@ const workspaceSchema=z.object({
 
 const CreateWorkspaceModal = () => {
 const   {openWorkspaceModal,setOpenWorkspaceModal}=useCreateWorkspaceModal()
-
+const router=useRouter()
 
 const {isPending,isSuccess,createWorkspaceMutation}=useCreateWorkspace()
 
@@ -28,7 +30,10 @@ const {isPending,isSuccess,createWorkspaceMutation}=useCreateWorkspace()
      try{
 const response=await createWorkspaceMutation(data)
 console.log('create the workspace',response)
-
+  
+ if(response?.data?._id){
+  router.push(`/workspace?workspaceId=${response?.data?._id}`)
+ }
      }catch(error){
       console.log('Not able to create the workspace',error)
      }finally{
@@ -39,6 +44,7 @@ console.log('create the workspace',response)
 
        
      }
+
 
     const {register,
         formState:{errors,isSubmitting},
