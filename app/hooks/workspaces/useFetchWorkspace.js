@@ -1,3 +1,4 @@
+'use client'
 import { fetchWorkspacesRequest } from "@/app/home/workspaceConfig/Workspace"
 import { useAuth } from "../auth/useAuth"
 import { useQuery } from "@tanstack/react-query"

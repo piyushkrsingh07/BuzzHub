@@ -5,6 +5,8 @@ import { Toaster } from "sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import QueryProvider from "./provider/QueryClientProvider";
 import { AppContextProvider } from "./context/AppContextProvider";
+import { Modals } from "./utils/modals/Modal";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +36,7 @@ export default function RootLayout({ children }) {
           <AppContextProvider>
         <ClientOnly>
   <main className="min-h-screen"> {children}</main>
-
+          <Modals/>
         <Toaster richColors/>
         </ClientOnly>
         </AppContextProvider>

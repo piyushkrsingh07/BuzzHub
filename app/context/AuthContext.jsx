@@ -17,6 +17,25 @@ export const AuthContextProvider=({children})=>{
 
     })
       
+            const user=getCookie('user')
+ 
+        const token = getCookie('token')
+      useEffect(()=>{
+
+          if (!user || !token) {
+    setAuth(prev => ({ ...prev, isLoading: false }))
+    return
+  }
+
+        console.log(user,token,'see user and token in auth provider')
+      
+            setAuth({
+                user:JSON.parse(user),
+                token:token,
+                isLoading:false
+            })
+        
+      },[user,token])
 
 
       async function logout (){
@@ -31,6 +50,7 @@ export const AuthContextProvider=({children})=>{
           
         })
         router.refresh()
+        router.push('/auth/signIn')
     
 }
 

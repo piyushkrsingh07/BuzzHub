@@ -7,8 +7,9 @@ export const useCreateWorkspace=()=>{
 
     const {isPending,isSuccess,error,mutateAsync:createWorkspaceMutation}=useMutation({
         mutationFn:(data)=>createWorkspaceRequest({...data,token:auth?.token}), //this is how we pass the custom argument in react query 
-        onSuccess:(data)=>{
-            console.log('Successfully created workspace',data)
+        onSuccess:(response)=>{
+            console.log('Successfully created workspace',response)
+           return response?.data?.data
         },
         onError:(error)=>{
             console.log('Failed to create workspace',error)
