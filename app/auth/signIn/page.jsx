@@ -62,17 +62,20 @@ defaultValues:{
         useEffect(()=>{
       
       console.log(auth,'checking auth received here in signin first')
-         if (!isSuccess) return
+         if (!isSuccess && !auth) return
 
   
         console.log(auth,'checking auth received here in signin last')
            
-        toast.success('Successfully signed in')
+        if(auth?.token){
+ toast.success('Successfully signed in')
+        }
+       
            const timer= setTimeout(()=>router.push('/home'),5000)
               return ()=>clearTimeout(timer)
         
      
-     },[isSuccess,auth?.token])
+     },[isSuccess])
   return (
      <Card className="w-full h-full ">
       <CardHeader>

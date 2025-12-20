@@ -12,7 +12,7 @@ export async function POST(request){
 
           
           const body=await request.json()
-          console.log(body,'see body at signup')
+          console.log(body,'see body at signin')
         //    const parsedData=await JSON.parse(body)
             // console.log(parsedData,'dekho parsed data ') 
            const response=await signInService(body)
@@ -20,6 +20,12 @@ export async function POST(request){
          cookies().set("token", token, {
       expires: new Date(Date.now() + 8 * 3600000),
     });
+
+      cookies().set("user", JSON.stringify(response), {
+      expires: new Date(Date.now() + 8 * 3600000),
+    });
+    
+
         //    const sendMail=await mailResponse()
         //    console.log(sendMail,'dekho mail sent or not')
         //    console.log(typeof sendMail,'see type of send mail')

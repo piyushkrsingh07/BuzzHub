@@ -9,7 +9,7 @@ console.log('checking auth',auth,auth?.token)
     const {isFetching,isSuccess,error,data:workspaces}=useQuery({
        queryFn:()=>fetchWorkspacesRequest({auth,token:auth?.token}),
        queryKey:['fetchWorkspaces'],
-       staleTime:30000
+       
     })
 
     return {
