@@ -8,6 +8,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 import WorkspaceNavBar from './_components/WorkspaceNavBar'
+import WorkspacePanel from './_components/WorkspacePanel'
 
 
 
@@ -26,10 +27,7 @@ const WorkspaceLayout = ({children}) => {
               className='bg-medium '
             
             >
-              <div>
-                  Sidebar
-              </div>
-
+            <WorkspacePanel/>
             </ResizablePanel> 
             <ResizableHandle withHandle/>
             <ResizablePanel
