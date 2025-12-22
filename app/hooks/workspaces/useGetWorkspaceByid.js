@@ -18,7 +18,7 @@ export const useGetWorkspaceById=(id)=>{
          enabled: Boolean(id && auth?.token),
          refetchOnWindowFocus: false,
 
-        staleTime:10000
+        // staleTime:10000
     })
 
     return {

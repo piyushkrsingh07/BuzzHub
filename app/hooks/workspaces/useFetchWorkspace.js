@@ -10,7 +10,9 @@ console.log('checking auth',auth,auth?.token)
     const {isFetching,isSuccess,error,data:workspaces}=useQuery({
        queryFn:()=>fetchWorkspacesRequest({auth,token:auth?.token}),
        queryKey:['fetchWorkspaces'],
-       staleTime:10000
+    //    staleTime:10000,
+                enabled: Boolean( auth?.token),
+         refetchOnWindowFocus: false,
     })
 
     return {

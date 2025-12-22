@@ -1,23 +1,21 @@
 'use client'
 import { useGetWorkspaceById } from "@/app/hooks/workspaces/useGetWorkspaceByid"
 import { Button } from "@/components/ui/button"
-import { InfoIcon, LucideLoader2, SearchIcon } from "lucide-react"
+import { InfoIcon, Loader, LucideLoader2, SearchIcon } from "lucide-react"
 import { useParams, useSearchParams } from "next/navigation"
 
-export const WorkSpaceOptions=()=>{
+const WorkspaceNavBar=()=>{
 
 const params = useSearchParams()
     console.log(params,'see params')
     const workspaceId=params.get('workspaceId')
 console.log(workspaceId,'checking the workspace id')
-if(!workspaceId) return
+
 
     const {isFetching,workspace}=useGetWorkspaceById(workspaceId)
     console.log(workspace,'see workspace received')
 
-    if(isFetching){
-        return <LucideLoader2 className="animate-spin ml-2" />
-    }
+   
     return (
    <nav
     className="flex items-center justify-center h-10 p-1 bg-dark " 
@@ -29,7 +27,8 @@ if(!workspaceId) return
         className='mb-1 bg-accent/25 hover:bg-accent/15 w-full justify-start h-7 px-2'>
             <SearchIcon className="size-5 text-white mr-2"/>
             <span className="text-white text-xs ">
-                Search  {workspace?.data?.name || 'Workspace'}
+                 {isFetching ? (<Loader/>):` Search ${workspace?.data?.name}`}
+             
             </span>
         </Button>
      </div>
@@ -41,3 +40,7 @@ if(!workspaceId) return
    </nav>
     )
 } 
+
+
+
+export default WorkspaceNavBar

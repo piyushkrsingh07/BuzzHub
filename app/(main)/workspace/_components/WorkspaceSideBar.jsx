@@ -2,6 +2,7 @@ import React from 'react'
 import { SideBarButton } from './SideBarButton'
 import { BellIcon, HomeIcon, MessageSquareIcon, MoreHorizontalIcon } from 'lucide-react'
 import { UserButton } from '@/app/home/_components/UserButton'
+import WorkspaceSwitcher from './WorkspaceSwitcher'
 
 
 const WorkspaceSideBar = () => {
@@ -24,6 +25,7 @@ const WorkspaceSideBar = () => {
     ]
   return (
     <div className='w-[70px] h-screen bg-[#481349] flex flex-col gap-y-4 items-center pt-[10px] pb-[5px]'>
+        <WorkspaceSwitcher/>
 {routes.map((route)=>(
  
   <SideBarButton 
@@ -35,7 +37,7 @@ const WorkspaceSideBar = () => {
 ))
 }
 
-<div className='flex flex-col items-center justify-center mt-auto gap-y-1'>
+<div className='flex flex-col items-center justify-center mt-[29rem]  gap-y-1'>
     <UserButton/>
 </div>
     
