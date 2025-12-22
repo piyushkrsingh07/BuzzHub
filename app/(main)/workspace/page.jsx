@@ -23,7 +23,7 @@ const WorkspaceLayout = ({children}) => {
           <ResizablePanelGroup direction="horizontal" >
             <ResizablePanel
               defaultSize={500}
-              minSize={100}
+              minSize={400}
               className='bg-medium '
             
             >
@@ -31,7 +31,7 @@ const WorkspaceLayout = ({children}) => {
             </ResizablePanel> 
             <ResizableHandle withHandle/>
             <ResizablePanel
-              minSize={20}
+             minSize={400}
             >
                    {children}
               

@@ -1,6 +1,7 @@
 'use client'
 import { useGetWorkspaceById } from "@/app/hooks/workspaces/useGetWorkspaceByid"
 import { Button } from "@/components/ui/button"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { InfoIcon, Loader, LucideLoader2, SearchIcon } from "lucide-react"
 import { useParams, useSearchParams } from "next/navigation"
 
@@ -32,10 +33,18 @@ console.log(workspaceId,'checking the workspace id')
             </span>
         </Button>
      </div>
-     <div className="ml-auto flex-1 flex items-center justify-end">
+     <div className="ml-auto flex-1 flex items-center justify-end mr-2">
+          <Tooltip>
+      <TooltipTrigger asChild>
         <Button variant="transparent" size='iconsm'>
             <InfoIcon />
         </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p className=''>Edit</p>
+      </TooltipContent>
+    </Tooltip>
+
      </div>
    </nav>
     )
