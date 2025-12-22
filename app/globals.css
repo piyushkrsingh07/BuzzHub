@@ -5,6 +5,7 @@
 
 @theme inline {
   --color-main: #5c3B58;
+  --color-dark:#481349;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

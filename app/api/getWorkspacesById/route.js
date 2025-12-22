@@ -11,6 +11,7 @@ export async function GET (request){
       const {searchParams}=new URL(request.url)
       
               const id=searchParams.get("workspaceId") 
+              console.log(id,'checking id')
                 const token=request.headers.get('x-access-token')
       const user=await isAuthenticated(token)
       

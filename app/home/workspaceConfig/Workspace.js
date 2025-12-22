@@ -38,7 +38,8 @@ export const fetchWorkspacesRequest = async({auth,token})=>{
     }
 }
 
-export const fetchWorkspaceDetailsRequest = async({workspaceId,token})=>{
+export const fetchWorkspaceDetailsRequest = async(workspaceId,token)=>{
+    console.log('finally id is',workspaceId,token)
     try{
      const response=await axios.get(`/api/getWorkspacesById?workspaceId=${workspaceId}`,{
         headers:{
