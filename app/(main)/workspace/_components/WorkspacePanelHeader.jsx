@@ -11,7 +11,7 @@ import React, { useEffect } from 'react'
 
 const WorkspacePanelHeader = ({workspace}) => {
 
-  const {openPreferences,setOpenPreferences}=useWorkspacePreferencesModal()
+  const {openPreferences,setOpenPreferences,setInitialValue}=useWorkspacePreferencesModal()
 
      const {auth}=useAuth()
     const workspaceMembers=workspace?.data?.members
@@ -54,7 +54,11 @@ const WorkspacePanelHeader = ({workspace}) => {
             <>
             <DropdownMenuItem 
             className='cursor-pointer py-2'
-            onClick={()=>setOpenPreferences(true)}
+            onClick={()=>{
+              setOpenPreferences(true)
+              setInitialValue(workspace?.data?.name)
+            }
+          }
             >
                 Preferences
             </DropdownMenuItem>

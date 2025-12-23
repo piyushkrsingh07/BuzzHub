@@ -54,3 +54,37 @@ return response.data
     }
 }
 
+export const deleteWorkspaceRequest=async({workspaceId,token})=>{
+    try{
+const response=await axios.delete(`/api/deleteWorkspace?id=${workspaceId}`,{
+    headers:{
+        'x-access-token':token
+    }
+}
+)
+
+return response?.data?.data
+    }catch(error){
+               console.log('Error in de',error)
+        throw error.response.data
+    }
+}
+
+export const updateWorkspaceRequest=async({workspaceId,name,token})=>{
+    try{
+       const response=await axios.put(`/api/updateWorkspace?workspaceId=${workspaceId}`,{
+        name
+       },{
+        headers:{
+'x-access-token':token
+        }
+       }
+        
+       )
+
+       return response?.data?.data
+    }catch(error){
+                       console.log('Error in de',error)
+        throw error.response.data
+    }
+}
