@@ -54,9 +54,11 @@ return response.data
     }
 }
 
-export const deleteWorkspaceRequest=async({workspaceId,token})=>{
+export const deleteWorkspaceRequest=async(workspaceId,token)=>{
+
     try{
-const response=await axios.delete(`/api/deleteWorkspace?id=${workspaceId}`,{
+        console.log(workspaceId,'id before deletion')
+const response=await axios.delete(`/api/deleteWorkSpace?id=${workspaceId}`,{
     headers:{
         'x-access-token':token
     }

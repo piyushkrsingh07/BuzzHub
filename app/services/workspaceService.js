@@ -106,6 +106,8 @@ export const getWorkspacesUserIsMemberOfService=async(userId)=>{
 export const deleteWorkSpaceService=async(workspaceId,userId)=>{
     try{
    const workspace=await workspaceRepository.getById(workspaceId)
+
+   console.log(workspace,'workspace in backend')
    
    if(!workspace){
     throw new ClientError({
@@ -114,7 +116,7 @@ export const deleteWorkSpaceService=async(workspaceId,userId)=>{
         statusCode:StatusCodes.NOT_FOUND
     })
    }
-   const isAllowed=isUserAdminOfWorkspace(workspaceId,userId)
+   const isAllowed=isUserAdminOfWorkspace(workspace,userId)
 
 //    const channelId=workspace.channels.map((channel)=>channel._id)
 if(isAllowed){

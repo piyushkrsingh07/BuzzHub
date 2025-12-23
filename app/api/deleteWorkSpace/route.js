@@ -13,7 +13,7 @@ const {searchParams}=new URL(request.url)
         const id=searchParams.get("id") 
           const token=request.headers.get('x-access-token')
 const user=await isAuthenticated(token)
-
+ console.log(user,'see user in backend')
         const response=await deleteWorkSpaceService(id,user._id)
            
 return NextResponse.json(successResponse(response,'WorkSpace deleted successfully'),{ status:StatusCodes.OK })

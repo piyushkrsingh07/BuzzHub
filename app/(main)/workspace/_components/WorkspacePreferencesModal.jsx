@@ -1,13 +1,38 @@
 'use client'
+import { useDeleteWorkspace } from '@/app/hooks/workspaces/useDeleteWorkspace'
 import { useWorkspacePreferencesModal } from '@/app/hooks/workspaces/useWorkspacePreferencesModal'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { TrashIcon } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
+import { toast } from 'sonner'
 
 const WorkspacePreferencesModal = () => {
 
+        const router=useRouter()
+        const params = useSearchParams()
+            console.log(params,'see params')
+
+
+            const workspaceId=params.get('workspaceId')
+            console.log(workspaceId,'see workspace id ')
     const {initialValue,setInitialValue,openPreferences,setOpenPreferences}=useWorkspacePreferencesModal()
+
+    const {deleteWorkspaceMutation}=useDeleteWorkspace()
+
+    const handleDelete=async()=>{
+       try{
+       
+ const reponse=await deleteWorkspaceMutation(workspaceId)
+ console.log('checking out the repsonse',reponse)
+   toast.success('Workspace deleted successfully')
+   
+       }catch(error){
+        console.log('Error in deleting workspace')
+toast.error('Error in deleting workspace')
+       }
+    }
    
   return (
    <Dialog open={openPreferences} onOpenChange={()=>setOpenPreferences(false)}>
@@ -34,7 +59,7 @@ const WorkspacePreferencesModal = () => {
                
              </div>
           </div>
-          <Button variant='destructive'>
+          <Button variant='destructive' onClick={handleDelete}>
             <TrashIcon /> 
             Delete Workspace
           </Button>
