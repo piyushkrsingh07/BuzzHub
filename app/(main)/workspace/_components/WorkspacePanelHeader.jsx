@@ -1,16 +1,21 @@
+'use client'
 import { useAuth } from '@/app/hooks/auth/useAuth'
+import { useWorkspacePreferencesModal } from '@/app/hooks/workspaces/useWorkspacePreferencesModal'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 
 import { ChevronDown, ListFilterIcon, SquarePenIcon } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const WorkspacePanelHeader = ({workspace}) => {
 
+  const {openPreferences,setOpenPreferences}=useWorkspacePreferencesModal()
+
      const {auth}=useAuth()
     const workspaceMembers=workspace?.data?.members
+
 
     const isLoggedInUserAdminOfWorkspace=workspaceMembers?.find((member)=>member.memberId === auth?.user?.userId && member?.role === 'admin')
    
@@ -48,7 +53,9 @@ const WorkspacePanelHeader = ({workspace}) => {
         {isLoggedInUserAdminOfWorkspace && (
             <>
             <DropdownMenuItem 
-            className='cursor-pointer py-2'>
+            className='cursor-pointer py-2'
+            onClick={()=>setOpenPreferences(true)}
+            >
                 Preferences
             </DropdownMenuItem>
             <DropdownMenuSeparator />
