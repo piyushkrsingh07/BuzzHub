@@ -11,7 +11,7 @@ import React, { useEffect } from 'react'
 
 const WorkspacePanelHeader = ({workspace}) => {
 
-  const {openPreferences,setOpenPreferences,setInitialValue}=useWorkspacePreferencesModal()
+  const {openPreferences,setOpenPreferences,setInitialValue,setWorkspace}=useWorkspacePreferencesModal()
 
      const {auth}=useAuth()
     const workspaceMembers=workspace?.data?.members
@@ -57,6 +57,7 @@ const WorkspacePanelHeader = ({workspace}) => {
             onClick={()=>{
               setOpenPreferences(true)
               setInitialValue(workspace?.data?.name)
+              setWorkspace(workspace)
             }
           }
             >

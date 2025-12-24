@@ -3,7 +3,7 @@ import { useAuth } from "../auth/useAuth"
 import { useMutation } from "@tanstack/react-query"
 
 export const useUpdateWorkspace=(workspaceId)=>{
-    
+    console.log('see received workspace id',workspaceId)
       const {auth}=useAuth()
     const {isPending,isSuccess,error,mutateAsync:UpdateWorkspaceMutation}=useMutation({
         mutationFn:(name)=>updateWorkspaceRequest({workspaceId,name,token:auth?.token}),

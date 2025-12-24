@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation'
 import { useSignIn } from '@/app/hooks/auth/useSignIn'
 import { toast } from 'sonner'
 import { useAuth } from '@/app/hooks/auth/useAuth'
+import { useFetchWorkspace } from '@/app/hooks/workspaces/useFetchWorkspace'
+import { useCreateWorkspaceModal } from '@/app/hooks/workspaces/useCreateWorkspaceModal'
 
 const signInSchema=z.object({
     email:z.string().trim().min(4,{message:"Invalid email"}).max(30,{message:"Invalid email"}),
@@ -49,6 +51,9 @@ defaultValues:{
     const {auth}=useAuth()
 
           const {isPending,isSuccess,error,signInMutation}=useSignIn()
+                   const {isFetching,workspaces}=useFetchWorkspace()
+  
+        const {setOpenWorkspaceModal}=useCreateWorkspaceModal()
 
      const onSubmit=async(data)=>{
         console.log(data,'see data from signin form')
@@ -70,12 +75,26 @@ defaultValues:{
         if(auth?.token){
  toast.success('Successfully signed in')
         }
+
+  
+        
+            if(isFetching) return
+            console.log('workspace downloaded is ',workspaces)
+            if(workspaces.length === 0 || !workspaces){
+              console.log('no workspace found,creating one')
+        setOpenWorkspaceModal(true)
+            }
+            else{
+              const timer=setTimeout(()=>{
+         router.push(`/workspace?workspaceId=${workspaces?.data[0]?._id}`)
+              },3000)
+                return ()=>clearTimeout(timer)
+            }
        
-           const timer= setTimeout(()=>router.push('/home'),5000)
-              return ()=>clearTimeout(timer)
+           
         
      
-     },[isSuccess])
+     },[isSuccess,isFetching,workspaces])
   return (
      <Card className="w-full h-full ">
       <CardHeader>
@@ -123,7 +142,7 @@ defaultValues:{
              disabled={isSubmitting}
             >
              {
-              isSubmitting?(<>
+              isSubmitting || isFetching?(<>
                <Loader2 className='mr-2 h-4 w-4 animate-spin'/>
                Submitting...
               </>):(

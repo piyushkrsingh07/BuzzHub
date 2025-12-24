@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
 
 
 const workspaceSchema=z.object({
@@ -21,6 +22,7 @@ const workspaceSchema=z.object({
 const CreateWorkspaceModal = () => {
 const   {openWorkspaceModal,setOpenWorkspaceModal}=useCreateWorkspaceModal()
 const router=useRouter()
+const queryClient=useQueryClient()
 
 const {isPending,isSuccess,createWorkspaceMutation}=useCreateWorkspace()
 
@@ -30,7 +32,7 @@ const {isPending,isSuccess,createWorkspaceMutation}=useCreateWorkspace()
      try{
 const response=await createWorkspaceMutation(data)
 console.log('create the workspace',response)
-  
+ queryClient.invalidateQueries({ queryKey: ['fetchWorkspaces'] })
  if(response?.data?._id){
   router.push(`/workspace?workspaceId=${response?.data?._id}`)
  }
