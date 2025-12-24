@@ -80,9 +80,9 @@ defaultValues:{
         
             if(isFetching) return
             console.log('workspace downloaded is ',workspaces)
-            if(workspaces.length === 0 || !workspaces){
+            if(workspaces?.length === 0 || !workspaces){
               console.log('no workspace found,creating one')
-        setOpenWorkspaceModal(true)
+        // setOpenWorkspaceModal(true)
             }
             else{
               const timer=setTimeout(()=>{

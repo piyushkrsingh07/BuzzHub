@@ -1,11 +1,12 @@
 'use client'
+import { useCreateWorkspaceModal } from '@/app/hooks/workspaces/useCreateWorkspaceModal'
 import { useFetchWorkspace } from '@/app/hooks/workspaces/useFetchWorkspace'
 import { useGetWorkspaceById } from '@/app/hooks/workspaces/useGetWorkspaceByid'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Loader } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const WorkspaceSwitcher = () => {
 
@@ -13,6 +14,7 @@ const WorkspaceSwitcher = () => {
     const params = useSearchParams()
         console.log(params,'see params')
         const workspaceId=params.get('workspaceId')
+              const {setOpenWorkspaceModal}=useCreateWorkspaceModal()
 
         if(!workspaceId) return
         
@@ -21,6 +23,12 @@ const WorkspaceSwitcher = () => {
           const {workspaces,isFetching:isFetchingWorkspace} = useFetchWorkspace()
 
           console.log(workspaces,'checking out workspaces')
+
+          // useEffect(()=>{
+          //     if(!workspaces?.length>0){
+          //      setOpenWorkspaceModal(true)
+          //     }
+          // },[workspaces])
 
 
   return (

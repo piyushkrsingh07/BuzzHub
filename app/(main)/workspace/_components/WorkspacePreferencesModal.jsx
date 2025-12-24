@@ -1,4 +1,5 @@
 'use client'
+import { useCreateWorkspaceModal } from '@/app/hooks/workspaces/useCreateWorkspaceModal'
 import { useDeleteWorkspace } from '@/app/hooks/workspaces/useDeleteWorkspace'
 import { useFetchWorkspace } from '@/app/hooks/workspaces/useFetchWorkspace'
 import { useUpdateWorkspace } from '@/app/hooks/workspaces/useUpdateWorkspace'
@@ -28,6 +29,7 @@ const WorkspacePreferencesModal = () => {
 console.log('see inital ',initialValue)
 
     const {deleteWorkspaceMutation}=useDeleteWorkspace()
+            const {setOpenWorkspaceModal}=useCreateWorkspaceModal()
      const [editOpen,setEditOpen]=useState(false)
      const [renameValue,setRenameValue]=useState(null)
 
@@ -51,11 +53,11 @@ queryClient.invalidateQueries({ queryKey: ['fetchWorkspaces'] })
     const timer=setTimeout(()=>{
          router.push(`/workspace?workspaceId=${workspaces?.data[0]?._id}`)
               },3000)
-                return ()=>clearTimeout(timer)
-   
 
+
+  return ()=>clearTimeout(timer)
        }catch(error){
-        console.log('Error in deleting workspace')
+        console.log('Error in deleting workspace',error)
 toast.error('Error in deleting workspace')
        }
     }
@@ -80,6 +82,13 @@ toast.error('Error in updating workspace')
     useEffect(()=>{
        setRenameValue(initialValue)
     },[initialValue])
+
+    useEffect(()=>{
+     if(workspaces?.data?.length === 0){
+  setOpenWorkspaceModal(true)
+  
+ }
+    },[workspaces])
   return (
    <Dialog open={openPreferences} onOpenChange={()=>setOpenPreferences(false)}>
      <DialogContent className='p-0 bg-gray-50 overflow-hidden'>
