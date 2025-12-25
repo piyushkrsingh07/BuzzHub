@@ -90,3 +90,20 @@ export const updateWorkspaceRequest=async({workspaceId,name,token})=>{
         throw error.response.data
     }
 }
+
+export const addChannelToWorkspace=async({workspaceId,channelName,token})=>{
+    console.log(token,'checking final token')
+    try{
+       const response=await axios.put(`/api/updateWorkspaceChannels?workspaceId=${workspaceId}&channeName=${channelName}`,null
+        ,{
+        headers:{
+            'x-access-token':token
+        }
+       })
+
+       return response?.data?.data
+    }catch(error){
+            console.log('Error in de',error)
+        throw error.response.data
+    }
+}

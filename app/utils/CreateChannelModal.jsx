@@ -7,6 +7,12 @@ import z from "zod"
 import { useForm } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useAddChannelToWorkspace } from "../hooks/channel/useAddChannelToWorkspace"
+import { useParams } from "next/navigation"
+import { useCurrentWorkspace } from "../hooks/workspaces/useCurrentWorkspace"
+import { toast } from "sonner"
+import { Loader2 } from "lucide-react"
+import { useQueryClient } from "@tanstack/react-query"
 
 
 const channelSchema=z.object({
@@ -15,7 +21,15 @@ const channelSchema=z.object({
 })
 
 export const CreateChannelModal=()=>{
+  const queryClient=useQueryClient()
+const {currentWorkspace}=useCurrentWorkspace()
+
+console.log(currentWorkspace,'see curent worksapce')
+  const params=useParams()
+  const {workspaceId}=params
     const {openCreateChannelModal,setOpenCreateChannelModal}=useCreateChannelModal()
+    const {isPending,isSuccess,error,addChannelToWorkspaceMutation}=useAddChannelToWorkspace(workspaceId)
+
 
     function handleClose(){
         setOpenCreateChannelModal(false)
@@ -35,8 +49,19 @@ channelName:""
 
 
     })
-    const onSubmit=()=>{
-
+    const onSubmit=async(data)=>{
+        console.log(data,data.channelName,'checking out data')
+        
+        try{
+const response=await addChannelToWorkspaceMutation(data?.channelName)
+console.log(response,'see responses')
+ queryClient.invalidateQueries({ queryKey: ['fetchWorkspaces'] })
+toast.success('Channel Added Successfully')
+        }catch(error){
+          console.log('Not able to add the channel',error)
+        }finally{
+setOpenCreateChannelModal(false)
+        }
     }
     return(
         <Dialog open={openCreateChannelModal} onOpenChange={handleClose}>

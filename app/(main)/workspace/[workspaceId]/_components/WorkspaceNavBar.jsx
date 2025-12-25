@@ -1,9 +1,11 @@
 'use client'
+import { useCurrentWorkspace } from "@/app/hooks/workspaces/useCurrentWorkspace"
 import { useGetWorkspaceById } from "@/app/hooks/workspaces/useGetWorkspaceByid"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { InfoIcon, Loader, LucideLoader2, SearchIcon } from "lucide-react"
 import { useParams, useSearchParams } from "next/navigation"
+import { useEffect } from "react"
 
 const WorkspaceNavBar=()=>{
 
@@ -15,7 +17,13 @@ console.log(workspaceId,'checking the workspace id')
 
     const {isFetching,workspace}=useGetWorkspaceById(workspaceId)
     console.log(workspace,'see workspace received')
+const {setCurrentWorkspace}=useCurrentWorkspace()
 
+useEffect(()=>{
+   if(workspace){
+    setCurrentWorkspace(workspace)
+   }
+},[workspace,setCurrentWorkspace])
    
     return (
    <nav

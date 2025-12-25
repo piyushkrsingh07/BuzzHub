@@ -12,8 +12,9 @@ export async function PUT(request){
     try{
        
         await connect()
-
-        const token=request.headers.get('x-access-token')
+ const token=request.headers.get('x-access-token')
+     
+        console.log(token,'see received token')
 
       
 
@@ -23,6 +24,7 @@ export async function PUT(request){
         const channelName=searchParams.get('channeName')
 
           const authenticatedUser=await isAuthenticated(token)
+          console.log(authenticatedUser,'checking out authenticated user')
 
           const {_id}=authenticatedUser
 
