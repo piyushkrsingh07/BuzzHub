@@ -1,9 +1,12 @@
 'use client'
 import { useGetWorkspaceById } from '@/app/hooks/workspaces/useGetWorkspaceByid'
-import { AlertTriangleIcon, Loader } from 'lucide-react'
+import { AlertTriangleIcon, HashIcon, Loader, MessageSquareText, SendHorizonalIcon } from 'lucide-react'
 import { useParams, useSearchParams } from 'next/navigation'
 import React from 'react'
 import WorkspacePanelHeader from './WorkspacePanelHeader'
+import SideBarItem from './SideBarItem'
+import WorkspacePanelSection from './WorkspacePanelSection'
+import { useCreateChannelModal } from '@/app/hooks/channel/useCreateChannelModal'
 
 const WorkspacePanel = () => {
   const params=useParams()
@@ -13,6 +16,8 @@ const WorkspacePanel = () => {
     
     
         const {isFetching,workspace,isSuccess}=useGetWorkspaceById(workspaceId)
+
+        const {setOpenCreateChannelModal}=useCreateChannelModal()
         console.log(workspace,'see worksapce received')
         if(isFetching){
             return (
@@ -33,6 +38,27 @@ const WorkspacePanel = () => {
   return (
     <div className='flex flex-col h-full bg-medium'>
       <WorkspacePanelHeader workspace={workspace}/>
+      <div className='flex flex-col px-2'>
+         <SideBarItem
+           label='Threads'
+           icon={MessageSquareText}
+           id='threads'
+         variant='active'
+         />
+                 <SideBarItem
+           label='Drafts & Sends'
+           icon={SendHorizonalIcon}
+           id='drafts'
+         variant='default'
+         />
+      </div>
+      <div>
+        <WorkspacePanelSection label={'Channels'} onIconClick={()=>setOpenCreateChannelModal(true)}>
+        {workspace?.data?.channels.map((channel)=>{
+            return <SideBarItem  key={channel._id} icon={HashIcon} label={channel?.name} id={channel?._id}/>
+        })}
+        </WorkspacePanelSection>
+      </div>
     </div>
   )
 }

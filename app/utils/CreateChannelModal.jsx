@@ -1,5 +1,5 @@
 'use client'
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { useCreateChannelModal } from "../hooks/channel/useCreateChannelModal"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -42,7 +42,10 @@ channelName:""
         <Dialog open={openCreateChannelModal} onOpenChange={handleClose}>
         <DialogContent>
            <DialogHeader>
-            Create a channel
+            
+              <DialogTitle>
+                 Create a channel
+              </DialogTitle>
            </DialogHeader>
                <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
            
