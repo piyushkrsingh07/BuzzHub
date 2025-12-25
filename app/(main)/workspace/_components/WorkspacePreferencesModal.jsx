@@ -4,6 +4,7 @@ import { useDeleteWorkspace } from '@/app/hooks/workspaces/useDeleteWorkspace'
 import { useFetchWorkspace } from '@/app/hooks/workspaces/useFetchWorkspace'
 import { useUpdateWorkspace } from '@/app/hooks/workspaces/useUpdateWorkspace'
 import { useWorkspacePreferencesModal } from '@/app/hooks/workspaces/useWorkspacePreferencesModal'
+import { useConfirm } from '@/app/utils/useConfirm'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
@@ -35,13 +36,19 @@ console.log('see inital ',initialValue)
 
         const {isFetching,workspaces}=useFetchWorkspace()
 
+        const {confirmation,ConfirmDialog}=useConfirm({title:'Do you want to delete the workspace',message:'This action cannot be undone'})
+
 
 
 console.log('see workspace here',workspaces)
 
     const handleDelete=async()=>{
        try{
-       
+       //execution should stop here
+       const ok= await confirmation()
+       if(!ok){
+        return null
+       }
  const response=await deleteWorkspaceMutation(workspaceId)
  console.log('checking out the repsonse',response)
 
@@ -90,6 +97,8 @@ toast.error('Error in updating workspace')
  }
     },[workspaces])
   return (
+    <>
+    <ConfirmDialog/>
    <Dialog open={openPreferences} onOpenChange={()=>setOpenPreferences(false)}>
      <DialogContent className='p-0 bg-gray-50 overflow-hidden'>
         <DialogHeader className='p-6 border-b bg-white'>
@@ -163,6 +172,7 @@ toast.error('Error in updating workspace')
         </div>
      </DialogContent>
    </Dialog>
+   </>
   )
 }
 
