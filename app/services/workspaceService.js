@@ -26,7 +26,10 @@ const isUserAdminOfWorkspace=(workspace,userId)=>{
 }
 
 export const isUserMemberOfWorkspace=(workspace,userId)=>{
-    return workspace.members.find((member)=>member.memberId.toString() === userId.toString())
+    console.log(userId,'seeing userid received')
+    return workspace.members.find((member)=>{
+        console.log('memberid',member.memberId.toString(), userId.toString())
+       return member.memberId?._id.toString() === userId.toString()})
 }
 
 const isChannelAlreadyPartOfWorkspace=(workspace,channelName)=>{
@@ -140,7 +143,7 @@ throw new ClientError({
 
 export const getWorkspaceService=async(workspaceId,userId)=>{
     try{
-       const workspace=await workspaceRepository.getById(workspaceId)
+       const workspace=await workspaceRepository.getWorkspaceDetailsById(workspaceId)
        if(!workspace){
         throw new ClientError({
             explaination:'Invalid data sent from the client',
@@ -148,9 +151,9 @@ export const getWorkspaceService=async(workspaceId,userId)=>{
             statusCode:StatusCodes.NOT_FOUND
         })
        }
-
-       const isMember=isUserMemberOfWorkspace(workspace,userId)
-
+console.log(workspace,'seeing workspace received')
+       const isMember=await isUserMemberOfWorkspace(workspace,userId)
+console.log(isMember,'checking if member or not')
        if(!isMember){
         throw new ClientError({
             explaination:'User is not a member of workspace',

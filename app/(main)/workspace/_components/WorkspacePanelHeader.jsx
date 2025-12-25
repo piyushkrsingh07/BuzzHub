@@ -16,8 +16,10 @@ const WorkspacePanelHeader = ({workspace}) => {
      const {auth}=useAuth()
     const workspaceMembers=workspace?.data?.members
 
+    console.log(workspaceMembers,'see workspace meber')
 
-    const isLoggedInUserAdminOfWorkspace=workspaceMembers?.find((member)=>member.memberId === auth?.user?.userId && member?.role === 'admin')
+
+    const isLoggedInUserAdminOfWorkspace=workspaceMembers?.find((member)=>member.memberId._id === auth?.user?.userId && member?.role === 'admin')
    
     console.log(isLoggedInUserAdminOfWorkspace,'checking value final',auth)
   return (

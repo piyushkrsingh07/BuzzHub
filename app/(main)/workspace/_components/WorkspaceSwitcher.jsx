@@ -24,6 +24,8 @@ const WorkspaceSwitcher = () => {
 
           console.log(workspaces,'checking out workspaces')
 
+          console.log(workspace,'see workspace received')
+
           // useEffect(()=>{
           //     if(!workspaces?.length>0){
           //      setOpenWorkspaceModal(true)
