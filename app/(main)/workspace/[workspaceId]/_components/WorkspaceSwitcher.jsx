@@ -5,15 +5,15 @@ import { useGetWorkspaceById } from '@/app/hooks/workspaces/useGetWorkspaceByid'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Loader } from 'lucide-react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 const WorkspaceSwitcher = () => {
 
     const router=useRouter()
-    const params = useSearchParams()
-        console.log(params,'see params')
-        const workspaceId=params.get('workspaceId')
+  const params=useParams()
+    console.log(params,'see params')
+    const {workspaceId}=params
               const {setOpenWorkspaceModal}=useCreateWorkspaceModal()
 
         if(!workspaceId) return
@@ -56,7 +56,7 @@ const WorkspaceSwitcher = () => {
                     return null
                 }
                   return  <DropdownMenuItem key={workspace?._id}
-                  onClick={()=>router.push(`/workspace?workspaceId=${workspace?._id}`)}
+                  onClick={()=>router.push(`/workspace/${workspace?._id}`)}
                   className='cursor-pointer flex-col justify-start items-start '>
                      <p>{workspace?.name}</p>
                     </DropdownMenuItem>

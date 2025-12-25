@@ -1,12 +1,14 @@
 'use client'
 import React from 'react'
-import WorkspaceSideBar from "./_components/WorkspaceSideBar"
+
 
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
+
+import WorkspaceSideBar from './_components/WorkspaceSideBar'
 import WorkspaceNavBar from './_components/WorkspaceNavBar'
 import WorkspacePanel from './_components/WorkspacePanel'
 

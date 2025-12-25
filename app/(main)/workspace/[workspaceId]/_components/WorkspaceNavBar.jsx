@@ -7,9 +7,9 @@ import { useParams, useSearchParams } from "next/navigation"
 
 const WorkspaceNavBar=()=>{
 
-const params = useSearchParams()
+  const params=useParams()
     console.log(params,'see params')
-    const workspaceId=params.get('workspaceId')
+    const {workspaceId}=params
 console.log(workspaceId,'checking the workspace id')
 
 

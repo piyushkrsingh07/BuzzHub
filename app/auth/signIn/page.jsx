@@ -86,7 +86,7 @@ defaultValues:{
             }
             else{
               const timer=setTimeout(()=>{
-         router.push(`/workspace?workspaceId=${workspaces?.data[0]?._id}`)
+         router.push(`/workspace/${workspaces?.data[0]?._id}`)
               },3000)
                 return ()=>clearTimeout(timer)
             }

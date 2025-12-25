@@ -34,7 +34,7 @@ const response=await createWorkspaceMutation(data)
 console.log('create the workspace',response)
  queryClient.invalidateQueries({ queryKey: ['fetchWorkspaces'] })
  if(response?.data?._id){
-  router.push(`/workspace?workspaceId=${response?.data?._id}`)
+  router.push(`/workspace/${response?.data?._id}`)
  }
      }catch(error){
       console.log('Not able to create the workspace',error)

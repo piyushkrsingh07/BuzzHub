@@ -1,15 +1,14 @@
 'use client'
 import { useGetWorkspaceById } from '@/app/hooks/workspaces/useGetWorkspaceByid'
 import { AlertTriangleIcon, Loader } from 'lucide-react'
-import { useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import React from 'react'
 import WorkspacePanelHeader from './WorkspacePanelHeader'
 
 const WorkspacePanel = () => {
-
-    const params = useSearchParams()
-        console.log(params,'see params')
-        const workspaceId=params.get('workspaceId')
+  const params=useParams()
+    console.log(params,'see params')
+    const {workspaceId}=params
     console.log(workspaceId,'checking the workspace id')
     
     

@@ -10,7 +10,7 @@ import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogT
 import { Input } from '@/components/ui/input'
 import { useQueryClient } from '@tanstack/react-query'
 import { TrashIcon } from 'lucide-react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
@@ -19,11 +19,9 @@ const WorkspacePreferencesModal = () => {
 
   const queryClient=useQueryClient()
         const router=useRouter()
-        const params = useSearchParams()
-            console.log(params,'see params')
-
-
-            const workspaceId=params.get('workspaceId')
+  const params=useParams()
+    console.log(params,'see params')
+    const {workspaceId}=params
             console.log(workspaceId,'see workspace id ')
     const {initialValue,setInitialValue,openPreferences,setOpenPreferences,workspace}=useWorkspacePreferencesModal()
     const {isPending,isSuccess,error,UpdateWorkspaceMutation}=useUpdateWorkspace(workspaceId)
@@ -58,7 +56,7 @@ queryClient.invalidateQueries({ queryKey: ['fetchWorkspaces'] })
    toast.success('Workspace deleted successfully')
    console.log('see workspace here',workspaces)
     const timer=setTimeout(()=>{
-         router.push(`/workspace?workspaceId=${workspaces?.data[0]?._id}`)
+         router.push(`/workspace/${workspaces?.data[0]?._id}`)
               },3000)
 
 
