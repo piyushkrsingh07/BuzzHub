@@ -56,6 +56,7 @@ channelName:""
 const response=await addChannelToWorkspaceMutation(data?.channelName)
 console.log(response,'see responses')
  queryClient.invalidateQueries({ queryKey: ['fetchWorkspaces'] })
+ queryClient.invalidateQueries({queryKey:[`fetchWorkspaceById-${workspaceId}`]})
 toast.success('Channel Added Successfully')
         }catch(error){
           console.log('Not able to add the channel',error)

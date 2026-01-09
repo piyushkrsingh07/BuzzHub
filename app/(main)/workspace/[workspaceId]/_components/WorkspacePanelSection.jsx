@@ -30,7 +30,7 @@ const WorkspacePanelSection = ({children,label,onIconClick}) => {
             <Button 
               variant='transparent'
               size='sm'
-              className='opacity-0  group-hover:opacity-100 transition opacity ml-auto p-0.5 text-sm size-6 text-[#f9edffcc] '
+              className=' transition opacity ml-auto p-0.5 text-sm size-6 text-[#f9edffcc] '
               onClick={onIconClick}
             >
                 <PlusIcon  className='size-4'/>
