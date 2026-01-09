@@ -32,6 +32,7 @@ const WorkspacePanelHeader = ({workspace}) => {
     setOpenInviteModal={setOpenInviteModal}
     workspaceName={workspace?.data?.name}
     joinCode={workspace?.data?.joinCode}
+    workspaceId={workspace?.data?._id}
    />
     <div className='flex items-center justify-between px-4 h-[50px] gap-0.5'>
        <DropdownMenu>

@@ -4,17 +4,31 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { CopyIcon, RefreshCcwIcon } from 'lucide-react'
 import React from 'react'
 import { toast } from 'sonner'
+import { useResetJoinCode } from '../hooks/workspaces/useResetJoinCode'
+import { useRouter } from 'next/navigation'
 
-const WorkspaceInviteModal = ({openInviteModal,setOpenInviteModal,workspaceName,joinCode}) => {
+const WorkspaceInviteModal = ({openInviteModal,setOpenInviteModal,workspaceName,joinCode,workspaceId}) => {
 
     const handleCopy=async()=>{
-      const inviteLink=`${window.location.origin}/join/${joinCode}`
+      const inviteLink=`${joinCode}`
       await navigator.clipboard.writeText(inviteLink)
       toast.success('Link copied to cipboard')
     }
 
-    const handleResetCode=()=>{
+    const {resetJoinCodeMutation}=useResetJoinCode(workspaceId)
+    const router=useRouter()
 
+    const handleResetCode=async()=>{
+        try{
+        console.log('yha pahuch gye')
+       const response=await resetJoinCodeMutation()
+       console.log(response,'response in frontend join code')
+       toast.success('Join code reset successfully')
+        }
+
+    catch(error){
+        console.log('error in reseting the code',error)
+    }
     }
   return (
     <div>
@@ -36,6 +50,9 @@ const WorkspaceInviteModal = ({openInviteModal,setOpenInviteModal,workspaceName,
                        Copy Link 
                        <CopyIcon className='size-4 ml-2'/>
                     </Button>
+                    <p className='text-blue-500 cursor-pointer' onClick={()=>router.push(`/workspace/join/${joinCode}`)}>
+                        Redirect to join page
+                    </p>
                 </div>
 
                     <div className='flex  items-center justify-center w-full'>

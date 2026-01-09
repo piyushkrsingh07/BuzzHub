@@ -1,10 +1,11 @@
+import { connect } from "@/app/config/serverConfig"
 import { resetWorkspaceJoinCode } from "@/app/services/workspaceService"
 import { isAuthenticated } from "@/app/utils/common/authUtils"
 import { successResponse } from "@/app/utils/common/responseObjects"
 import { StatusCodes } from "http-status-codes"
 import { NextResponse } from "next/server"
 
-export async function PUT(){
+export async function PUT(request){
      try{
       await connect()
      const token=request.headers.get('x-access-token')
