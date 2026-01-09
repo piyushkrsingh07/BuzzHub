@@ -37,7 +37,10 @@ const WorkspacePanel = () => {
         }
   return (
     <div className='flex flex-col h-full bg-medium'>
-      <WorkspacePanelHeader workspace={workspace}/>
+      {workspace && (
+<WorkspacePanelHeader workspace={workspace}/>
+      )}
+      
       <div className='flex flex-col px-2'>
          <SideBarItem
            label='Threads'

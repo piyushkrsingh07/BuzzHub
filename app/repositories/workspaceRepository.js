@@ -134,6 +134,28 @@ console.log("dekho jo stage 2 se retun hua hai",workspaces)
         )
 
         return workspace
+    },
+    updateJoinCode:async function(workspaceId,newJoinCode){
+        const workspace=await Workspace.findById(workspaceId)
+
+          if(!workspace){
+            throw new ClientError({
+                explaination:'Invalid data sent from the client',
+                message:'Workspace not found',
+                statusCode:StatusCodes.NOT_FOUND
+            })
+        }
+
+        const updateJoinCode=await Workspace.findByIdAndUpdate(workspaceId,
+            { $set:{joinCode:newJoinCode}},
+            {new:true}
+        )
+
+        return updateJoinCode
+
+
+
+
     }
 }
 

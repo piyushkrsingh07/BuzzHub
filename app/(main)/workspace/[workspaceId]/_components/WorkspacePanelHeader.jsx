@@ -1,19 +1,22 @@
 'use client'
 import { useAuth } from '@/app/hooks/auth/useAuth'
 import { useWorkspacePreferencesModal } from '@/app/hooks/workspaces/useWorkspacePreferencesModal'
+import WorkspaceInviteModal from '@/app/utils/workspaceInviteModal'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 
 import { ChevronDown, ListFilterIcon, SquarePenIcon } from 'lucide-react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const WorkspacePanelHeader = ({workspace}) => {
 
   const {openPreferences,setOpenPreferences,setInitialValue,setWorkspace}=useWorkspacePreferencesModal()
+  const [openInviteModal,setOpenInviteModal]=useState(false)
 
      const {auth}=useAuth()
+  
     const workspaceMembers=workspace?.data?.members
 
     console.log(workspaceMembers,'see workspace meber')
@@ -23,6 +26,13 @@ const WorkspacePanelHeader = ({workspace}) => {
    
     console.log(isLoggedInUserAdminOfWorkspace,'checking value final',auth)
   return (
+    <>
+   <WorkspaceInviteModal
+    openInviteModal={openInviteModal}
+    setOpenInviteModal={setOpenInviteModal}
+    workspaceName={workspace?.data?.name}
+    joinCode={workspace?.data?.joinCode}
+   />
     <div className='flex items-center justify-between px-4 h-[50px] gap-0.5'>
        <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -66,7 +76,7 @@ const WorkspacePanelHeader = ({workspace}) => {
                 Preferences
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className='cursor-pointer py-2'>
+            <DropdownMenuItem className='cursor-pointer py-2' onClick={()=>setOpenInviteModal(true)}>
               Invite people to {workspace?.data?.name} 
             </DropdownMenuItem>
             </>
@@ -101,6 +111,7 @@ const WorkspacePanelHeader = ({workspace}) => {
        </div>
 
     </div>
+    </>
   )
 }
 
