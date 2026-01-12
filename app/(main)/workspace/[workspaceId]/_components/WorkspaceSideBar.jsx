@@ -24,7 +24,7 @@ const WorkspaceSideBar = () => {
         }
     ]
   return (
-    <div className='w-[70px] h-screen bg-[#481349] flex flex-col gap-y-4 items-center pt-[10px] pb-[5px]'>
+    <div className='w-[70px] h-screen bg-[#1A2B4B] flex flex-col gap-y-4 items-center pt-[10px] pb-[5px]'>
         <WorkspaceSwitcher/>
 {routes.map((route)=>(
  

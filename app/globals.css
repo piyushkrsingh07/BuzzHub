@@ -4,9 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-main: #5c3B58;
-  --color-dark:#481349;
-  --color-medium:#5E2C5F;
+--color-main: #3B5C88;
+--color-dark: #1A2B4B;
+--color-medium: #3B5C88;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
