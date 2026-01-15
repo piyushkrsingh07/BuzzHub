@@ -7,6 +7,7 @@ import WorkspacePanelHeader from './WorkspacePanelHeader'
 import SideBarItem from './SideBarItem'
 import WorkspacePanelSection from './WorkspacePanelSection'
 import { useCreateChannelModal } from '@/app/hooks/channel/useCreateChannelModal'
+import { UserItem } from './UserItem'
 
 const WorkspacePanel = () => {
   const params=useParams()
@@ -60,6 +61,17 @@ const WorkspacePanel = () => {
         {workspace?.data?.channels.map((channel)=>{
             return <SideBarItem  key={channel._id} icon={HashIcon} label={channel?.name} id={channel?._id}/>
         })}
+        </WorkspacePanelSection>
+
+        <WorkspacePanelSection
+         label={'Direct Messages'}
+         onIconClick={()=>{}}
+        >
+          {workspace?.data?.members?.map((member)=>{
+            return <UserItem key={member._id} label={member.memberId?.username} id={member?.memberId?._id} 
+            image={member?.memberId?.avatar}
+            />
+          })}
         </WorkspacePanelSection>
       </div>
     </div>
