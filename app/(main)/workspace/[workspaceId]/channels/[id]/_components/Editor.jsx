@@ -90,16 +90,16 @@ export const Editor = ({
         >
 
             <div
-                className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white '
+                className='flex flex-col border border-slate-300 rounded-md overflow-hidden focus-within:shadow-sm focus-within:border-slate-400 bg-white gap-y-2'
             > 
        
-                <div className='h-full ql-custom' ref={containerRef} />
+                <div className='h-full ql-custom ' ref={containerRef} />
                 {
                     image && (
                         <div
-                            className='p-2'
+                            className='p-2 '
                         >
-                            <div className='relative size-[60px] flex items-center justify-center group/image'>
+                            <div className='relative size-[80px] flex items-center justify-center group/image'>
                                 <button
                                     className='hidden group-hover/image:flex rounded-full bg-black/70 hover:bg-black absolute -top-2.5 -right-2.5 text-white size-6 z-[5] border-2 border-white items-center justify-center'
                                     onClick={() => {
@@ -128,7 +128,7 @@ export const Editor = ({
                             disabled={false}
                             onClick={() => {  }}
                         >
-                            <ImageIcon className='size-4' />
+                            <ImageIcon className='size-4 mt-2' />
                         </Button>
                     </Hint>
 
@@ -144,9 +144,11 @@ export const Editor = ({
 
                         <Button
                         size='iconSm'
-                        className='ml-auto bg-[#007a6a] hover:bg-[#007a6a]' 
+                        className='ml-auto bg-[#007a6a] hover:bg-[#007a6a] p-2' 
                         onClick={()=>{
-                            console.log(quillRef.current?.getContents(),'hello')
+                            const messageContent=JSON.stringify(quillRef.current?.getContents())
+                            onSubmit({body:messageContent},'hello')
+                            quillRef.current?.setText('')
                         }}
                         disabled={false}
                      
